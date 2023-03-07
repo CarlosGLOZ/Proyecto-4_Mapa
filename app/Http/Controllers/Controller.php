@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gincana;
+use App\Models\JugadorGincana;
+use App\Models\Localizacion;
+use App\Models\SalaGincana;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -14,8 +19,10 @@ class Controller extends BaseController
 
     public function index()
     {
-        $user = User::find(1);
+        $tag = Tag::find(1);
 
-        return $user->likes;
+        $result = $tag->localizaciones;
+
+        return view('test.test', compact(['result']));
     }
 }
