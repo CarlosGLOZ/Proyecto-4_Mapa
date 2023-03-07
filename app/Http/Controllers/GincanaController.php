@@ -14,7 +14,17 @@ class GincanaController extends Controller
      */
     public function index()
     {
-        //
+       $gincana=Gincana::all();
+
+       return view('gynkana', compact(['gincana']));
+    }
+
+    public function listar() {
+
+
+        $gincanas = User::find(1)->gincanas();
+        return $gincanas;
+
     }
 
     /**

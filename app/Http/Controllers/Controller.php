@@ -19,10 +19,6 @@ class Controller extends BaseController
 
     public function index()
     {
-        $tag = Tag::find(1);
 
-        $result = $tag->localizaciones;
-
-        return view('test.test', compact(['result']));
     }
 }
