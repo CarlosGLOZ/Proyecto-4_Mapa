@@ -41,4 +41,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Las gincanas que ha creado este usuario
+     */
+    public function gincanas()
+    {
+        return $this->hasMany(Gincana::class);
+    }
+
+    /**
+     * Las gincanas que este usuario ha guardado en favoritos
+     */
+    public function likes()
+    {
+        return $this->belongsToMany(Localizacion::class, 'like_localizacions');
+    }
 }
