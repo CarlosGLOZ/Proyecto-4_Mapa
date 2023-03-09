@@ -9,32 +9,34 @@
 
 <div class="main-container">
     <div class="img-principal">
-        <img src="" alt="">
+        <img src="{{asset('storage/img/imagen-login.png')}}" alt="">
     </div>
-    <div class="Login">
-        <div class="titulo">
-            <p></p>
-        </div>
-        <form action="{{ route('auth.LoginRegistrar') }}" method="post">
+    <div class="titulo">
+        <p>GEOEXPLOER</p>
+    </div>
+    <div class="Login" id="login">
+
+        <form action="{{ route('auth.LoginRegistrar') }}" method="get">
             @csrf
             <div class="inputs">
-                <input type="email" name="email" placeholder="email">
+                <input type="email" name="email" placeholder="Email">
             </div>
+           
             <div class="inputs">
-                <input type="password" name="password" placeholder="password">
+                <input type="password" name="password" placeholder="Password">
             </div>
 
-            <div class="Button">
-                <button type="submit">Entrar</button>
+            <div class="Button" id="botonEnviar">
+                <button type="submit" >LOG IN</button>
+            </div>
+            <div class="Button2">
+                <button id="SingUp">sing up</button>
             </div>
         </form>
     </div>
 
-    <div class="Registrar">
-        <div class="titulo">
-            <p></p>
-        </div>
-        <form action="{{ route('auth.LoginRegistrar') }}" method="post">
+    <div class="Registrar" id="registrar">
+        <form name="registrar" action="{{ route('auth.LoginRegistrar') }}" method="get" onsubmit="return validarFormulario()">
             @csrf
             <div class="inputs">
                 <input type="text" name="name" placeholder="Nombre">
@@ -48,12 +50,19 @@
             <div class="inputs">
                 <input type="password" name="password_confirmation" placeholder="Confirmar contraseña">
             </div>
-            <div class="Button">
-                <button type="submit">Entrar</button>
+            <div class="Button" id="botonEnviar2">
+                <button type="submit" >Sing Up</button>
+            </div>
+            <div class="Button2">
+                <button id="LogIn">log in</button>
             </div>
         </form>
     </div>
 
 </div>
+
+@push('js')
+
+<script src="{{ asset('../resources/js/LoginRegistrar.js') }}"></script>
 
 @endsection

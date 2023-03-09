@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LikeLocalizacionController;
 use App\Http\Controllers\LocalizacionController;
+use App\Http\Controllers\GincanaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,7 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 // Localizaciones
 Route::get('/loc/localizaciones', [LocalizacionController::class, 'get'])->name('loc.localizaciones');
 Route::post('/loc/liked', [LikeLocalizacionController::class, 'isLiked'])->name('loc.liked');
+
+
+//GincanaPlay
+Route::get('/gincana/GincanaPlay', [GincanaController::class, 'showGincanaPlay'])->name('gincana.GincanaPlay');
