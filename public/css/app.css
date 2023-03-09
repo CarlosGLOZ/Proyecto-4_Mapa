@@ -4,5 +4,24 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
-    font-size: 12px;
+}
+
+body {
+    margin: 0%;
+    overflow: hidden;
+}
+
+@media screen and (orientation: portrait) {
+    html {
+        height: 100%;
+        overflow: hidden;
+    }
+    body {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: auto;
+    }
 }

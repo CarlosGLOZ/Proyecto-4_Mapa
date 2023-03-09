@@ -57,4 +57,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Localizacion::class, 'like_localizacions');
     }
+
+    /**
+     * La sala que está hosteando este usuario
+     */
+    public function sala()
+    {
+        return $this->hasOne(SalaGincana::class);
+    }
 }

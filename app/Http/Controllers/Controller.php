@@ -12,10 +12,11 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    /**
+     * Pagina principal
+     */
     public function index()
     {
-        $user = User::find(1);
-
-        return $user->likes;
+        return view('home');
     }
 }
