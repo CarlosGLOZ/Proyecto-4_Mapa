@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\GincanaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Controller::class, 'index'])->name('home');
+//Route::get('/', [Controller::class, 'index'])->name('home');
 
 // Auth
 Route::get('/auth/LoginRegistrar', [AuthController::class, 'showLoginRegistrar'])->name('auth.LoginRegistrar');
 Route::post('/auth/registrar', [AuthController::class, 'registrar']);
 Route::post('/auth/login', [AuthController::class, 'login']);
+
+
+//Gincana
+Route::get('/gincana',[GincanaController::class,'crearView'])->name('gincana.crearView');

@@ -17,6 +17,11 @@ class GincanaController extends Controller
         //
     }
 
+    public function crearView()
+    {
+        return view('createGymkhana');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -22,7 +22,7 @@ function initMap() {
     });
 
     // Actualizar la posicion del usuario en el mapa
-    const watchId = navigator.geolocation.watchPosition((position) => {
+   /* const watchId = navigator.geolocation.watchPosition((position) => {
             // Success callback
 
             // Guardar la posicion del usuario en un objeto en localstorage
@@ -39,5 +39,5 @@ function initMap() {
         },
         () => {
             // Error callback
-        });
+        });*/
 }
