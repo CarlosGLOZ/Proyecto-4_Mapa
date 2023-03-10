@@ -86,7 +86,7 @@ function abrirMenu(punto) {
     } else { // sino, será un punto que viene desde Google Maps
         // console.log(punto);
         menuImagenWrapper.style.display = "block";
-        menuImagen.src = punto.photos[0].getUrl();
+        menuImagen.style.backgroundImage = "url(" + punto.photos[0].getUrl() + ')';
         menuTitulo.innerText = punto.name;
         menuAutor.innerText = 'Google Maps';
         menuDescripcion.style.display = 'none';

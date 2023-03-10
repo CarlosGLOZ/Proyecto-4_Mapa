@@ -39,18 +39,21 @@
             <i class="fa-solid fa-xmark" id="menu-localizacion-botoncerrar"></i>
         </div>
         <div id="menu-localizacion-imagen-wrapper">
-            <img src="" id="menu-localizacion-imagen">
+            <div id="menu-localizacion-imagen"></div>
         </div>
         <div id="menu-localizacion-datos">
             <p id="menu-localizacion-titulo"></p>
-            <p id="menu-localizacion-autor"></p>
+            <div class="contenedor-datos-intermedio">
+                <p id="menu-localizacion-autor"></p>
+                <i class="fa-regular fa-bookmark" id="menu-localizacion-botonfav"></i>
+            </div>
             <p id="menu-localizacion-descripcion"></p>
             <p id="menu-localizacion-direccion"></p>
             <div id="menu-localizacion-tags"></div>
         </div>
         <div id="menu-localizacion-botones">
             {{-- <button class="standard-button" id="menu-localizacion-botonfav"></button> --}}
-            <i class="fa-regular fa-bookmark" id="menu-localizacion-botonfav"></i>
+            {{-- <i class="fa-regular fa-bookmark" id="menu-localizacion-botonfav"></i> --}}
         </div>
     </div>
     @endsection
