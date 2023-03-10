@@ -17,6 +17,16 @@
 </head>
 
 <body>
+    @if (Auth::check())
+        <script>
+            const auth = true;
+        </script>
+    @else
+        <script>
+            const auth = false;
+        </script>
+    @endif
+
     {{-- Navbar --}}
 
     {{-- Contenido --}}

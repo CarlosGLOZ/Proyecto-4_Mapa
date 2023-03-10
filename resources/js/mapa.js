@@ -3,10 +3,27 @@ const mapaMain = document.getElementById('mapa-main');
 let mapa;
 
 const formGetLocalizaciones = document.getElementById('form-get-localizaciones');
+const formGetLiked = document.getElementById('form-get-liked');
+const formStoreLike = document.getElementById('form-store-like');
+const formDestroyLike = document.getElementById('form-destroy-like');
 
 const menuLocalizacion = document.getElementById('menu-localizacion');
 const menuBotonfav = document.getElementById('menu-localizacion-botonfav');
 const menuBotoncerrar = document.getElementById('menu-localizacion-botoncerrar');
+
+// Activar boton de like
+function activarLike(boton) {
+    console.log('activado');
+    boton.style.color = '#e4e100';
+    menuBotonfav.classList.replace('fa-regular', 'fa-solid');
+}
+
+// Desactivar boton de like
+function desactivarLike(boton) {
+    console.log('desactivado');
+    boton.style.color = 'black';
+    menuBotonfav.classList.replace('fa-solid', 'fa-regular');
+}
 
 // Abrir menu con info del marcador dado
 function abrirMenu(punto) {
@@ -38,10 +55,36 @@ function abrirMenu(punto) {
             menuTags.appendChild(tagChip);
         }
 
+        // Comprobar si el usuario le ha dado like a este punto
+        let formData = new FormData(formGetLiked);
+        formData.append('localizacion_id', punto.nombre);
+        formData.append('tipo_localizacion', 'BDD');
+
+        let ajax = new XMLHttpRequest();
+        ajax.open('POST', formGetLiked.action);
+
+        ajax.onload = (e) => {
+            if (ajax.status === 200) {
+                if (ajax.response == true) {
+                    // El usuario le ha dado a like al punto de interés
+                    menuBotonfav.dataset.action = 'removeLike';
+                    menuBotonfav.dataset.tipo = 'BDD';
+                    activarLike(menuBotonfav);
+                } else {
+                    // El usuario no le ha dado a like al punto de interés
+                    menuBotonfav.dataset.action = 'addLike';
+                    menuBotonfav.dataset.tipo = 'BDD';
+                    desactivarLike(menuBotonfav);
+                }
+            }
+        }
+
+        ajax.send(formData);
+
         // Mostrar menu
         menuLocalizacion.style.transform = "translateY(0)";
     } else { // sino, será un punto que viene desde Google Maps
-        console.log(punto);
+        // console.log(punto);
         menuImagenWrapper.style.display = "block";
         menuImagen.src = punto.photos[0].getUrl();
         menuTitulo.innerText = punto.name;
@@ -69,6 +112,33 @@ function abrirMenu(punto) {
 
         menuTags.appendChild(tagChip);
 
+        // Comprobar si el usuario le ha dado like a este punto
+        let formData = new FormData(formGetLiked);
+        formData.append('localizacion_id', punto.place_id);
+        formData.append('tipo_localizacion', 'Google Maps');
+
+        let ajax = new XMLHttpRequest();
+        ajax.open('POST', formGetLiked.action);
+
+        ajax.onload = (e) => {
+            if (ajax.status === 200) {
+                if (ajax.response == true) {
+                    // El usuario le ha dado a like al punto de interés
+                    menuBotonfav.dataset.action = 'removeLike';
+                    menuBotonfav.dataset.tipo = 'Google Maps';
+                    menuBotonfav.classList.replace('fa-soli', 'fa-regular');
+                    activarLike(menuBotonfav);
+                } else {
+                    // El usuario no le ha dado a like al punto de interés
+                    menuBotonfav.dataset.action = 'addLike';
+                    menuBotonfav.dataset.tipo = 'Google Maps';
+                    desactivarLike(menuBotonfav);
+                }
+            }
+        }
+
+        ajax.send(formData);
+
         // // Mostrar menu
         menuLocalizacion.style.transform = "translateY(0)";
     }
@@ -81,10 +151,64 @@ menuBotoncerrar.addEventListener('click', (e) => {
 
 // Añadir/quitar favorito
 menuBotonfav.addEventListener('click', (e) => {
-    if (menuBotonfav.dataset.set == 'addFav') {
-        menuBotonfav.dataset.set == 'removeFav';
-    } else if (menuBotonfav.dataset.set == 'removeFav') {
-        menuBotonfav.dataset.set == 'addFav';
+    // Si el usuario no está logueado, mandar a la pagina de login
+    if (!auth) {
+        window.location.href = "auth/LoginRegistrar";
+    } else {
+        if (menuBotonfav.dataset.action == 'addLike') {
+            // Mandar peticion de añadir favorito
+
+            let formData = new FormData(formStoreLike);
+            formData.append('id_localizacion', menuBotonfav.dataset.id);
+            formData.append('tipo_localizacion', menuBotonfav.dataset.tipo);
+
+            let ajax = new XMLHttpRequest();
+
+            ajax.open('POST', formStoreLike.action);
+
+            ajax.onload = (e) => {
+                if (ajax.status === 200) {
+                    let response = JSON.parse(ajax.response);
+
+                    if (response.status == 'OK') {
+                        // Se ha puesto el like, cambiar el botón
+                        menuBotonfav.dataset.action = 'removeLike';
+                        activarLike(menuBotonfav);
+                    }
+                }
+            }
+
+            ajax.send(formData);
+
+            menuBotonfav.dataset.action == 'removeLike';
+        } else if (menuBotonfav.dataset.action == 'removeLike') {
+            // Mandar peticion de borrar favorito
+
+            let formData = new FormData(formDestroyLike);
+            formData.append('id_localizacion', menuBotonfav.dataset.id);
+            formData.append('tipo_localizacion', menuBotonfav.dataset.tipo);
+
+            let ajax = new XMLHttpRequest();
+
+            ajax.open('POST', formDestroyLike.action);
+
+            ajax.onload = (e) => {
+                if (ajax.status === 200) {
+                    let response = JSON.parse(ajax.response);
+                    console.log(response.status);
+
+                    if (response.status == 'OK') {
+                        // Se ha puesto el like, cambiar el botón
+                        menuBotonfav.dataset.action = 'addLike';
+                        desactivarLike(menuBotonfav);
+                    }
+                }
+            }
+
+            ajax.send(formData);
+
+            menuBotonfav.dataset.action == 'addLike';
+        }
     }
 });
 
@@ -150,7 +274,7 @@ function initMap() {
     });
 
     // Añadir marcadores de la BDD al mapa
-    const ajax = new XMLHttpRequest();
+    let ajax = new XMLHttpRequest();
 
     ajax.open('GET', formGetLocalizaciones.action);
 

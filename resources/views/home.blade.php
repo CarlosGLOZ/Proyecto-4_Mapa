@@ -14,6 +14,9 @@
 @section('content')
     {{-- Formulario vacío para recoger el action en el JS --}}
     <form action="{{ route('loc.localizaciones') }}" method="get" id="form-get-localizaciones"></form>
+    <form action="{{ route('loc.liked') }}" method="get" id="form-get-liked">@csrf</form>
+    <form action="{{ route('loc.likeLocalizacion') }}" method="get" id="form-store-like">@csrf</form>
+    <form action="{{ route('loc.unlikeLocalizacion') }}" method="get" id="form-destroy-like">@csrf @method('DELETE')</form>
 
     {{-- Mapa --}}
     <div id="main-home">
@@ -46,7 +49,8 @@
             <div id="menu-localizacion-tags"></div>
         </div>
         <div id="menu-localizacion-botones">
-            <button class="standard-button" id="menu-localizacion-botonfav"></button>
+            {{-- <button class="standard-button" id="menu-localizacion-botonfav"></button> --}}
+            <i class="fa-regular fa-bookmark" id="menu-localizacion-botonfav"></i>
         </div>
     </div>
     @endsection
