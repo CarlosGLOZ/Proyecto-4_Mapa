@@ -21,10 +21,16 @@
 
 #map-buttons {
     z-index: 3;
-
     display: flex;
     flex-direction: column;
-    gap: 70px;
+    /* gap: 70px; */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 34px 40px;
+    background-color: white;
+    border: solid 1px;
 }
 
 .map-buttons-section {
@@ -32,7 +38,7 @@
     flex-direction: row;
     justify-content: space-between;
 
-    font-size: 30px;
+    font-size: 40px;
 
     user-select: none;
 
@@ -44,12 +50,8 @@
     }
 }
 
-#map-icon-button {
-    padding: 15px;
-    background-color: whitesmoke;
-    border: solid 1px black;
-    border-radius: 50px;
-}
+// #map-icon-button {
+// }
 
 
 // Menu de info sobre una localizacion

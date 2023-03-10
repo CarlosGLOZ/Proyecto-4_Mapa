@@ -16,13 +16,13 @@ const botonToggleFavoritos = document.getElementById('mapa-fav-toggle');
 // Activar boton de like
 function activarLike(boton) {
     boton.style.color = '#e4e100';
-    menuBotonfav.classList.replace('fa-regular', 'fa-solid');
+    boton.classList.replace('fa-regular', 'fa-solid');
 }
 
 // Desactivar boton de like
 function desactivarLike(boton) {
     boton.style.color = 'black';
-    menuBotonfav.classList.replace('fa-solid', 'fa-regular');
+    boton.classList.replace('fa-solid', 'fa-regular');
 }
 
 // Abrir menu con info del marcador dado
@@ -307,11 +307,13 @@ function initMap() {
                         marcadores[i].setVisible(true);
                     }
                     botonToggleFavoritos.dataset.set = 'shown';
+                    activarLike(botonToggleFavoritos);
                 } else if (botonToggleFavoritos.dataset.set == 'shown') {
                     for (let i = 0; i < marcadores.length; i++) {
                         marcadores[i].setVisible(false);
                     }
                     botonToggleFavoritos.dataset.set = 'hidden';
+                    desactivarLike(botonToggleFavoritos);
                 }
             });
         }
