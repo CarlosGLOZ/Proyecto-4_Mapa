@@ -50,7 +50,7 @@ body {
 }
 .search-box p {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 4px;
     font-size: 18px;
 }
 .container {
@@ -64,7 +64,7 @@ body {
     margin: 0;
     padding: 10px;
 }
-.search-box button {
+.search-box #button {
     background-color: green;
     border: none;
     color: white;
@@ -72,5 +72,38 @@ body {
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    float: right;
+
 }
+
+.boton-abajo-derecha {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 7px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+
+.boton-abajo-derecha + .boton-abajo-derecha {
+    bottom: 70px;
+}
+
+.boton1{
+    margin: 9px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 7px 10px;
+    text-align: left;
+    background-position: 10px center;
+
+
+}
+
+

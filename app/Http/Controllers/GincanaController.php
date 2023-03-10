@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use App\Models\Gincana;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GincanaController extends Controller
 {
@@ -19,11 +20,17 @@ class GincanaController extends Controller
        return view('gynkana', compact(['gincana']));
     }
 
-    public function listar() {
+    public function listar(Request $request) {
+        $filtro = $request->input('filtro');
+if (!$filtro==''){
+    $resu = Gincana::where('nombre', 'like', '%' . $filtro . '%')->get();
+    return response()->json($resu);
+}else{
+    $resu = Gincana::where('user_id', 2)->get();
+    return response()->json($resu);
 
+}
 
-        $gincanas = User::find(1)->gincanas();
-        return $gincanas;
 
     }
 
