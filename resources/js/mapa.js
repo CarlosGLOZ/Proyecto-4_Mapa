@@ -11,16 +11,16 @@ const menuLocalizacion = document.getElementById('menu-localizacion');
 const menuBotonfav = document.getElementById('menu-localizacion-botonfav');
 const menuBotoncerrar = document.getElementById('menu-localizacion-botoncerrar');
 
+const botonToggleFavoritos = document.getElementById('mapa-fav-toggle');
+
 // Activar boton de like
 function activarLike(boton) {
-    console.log('activado');
     boton.style.color = '#e4e100';
     menuBotonfav.classList.replace('fa-regular', 'fa-solid');
 }
 
 // Desactivar boton de like
 function desactivarLike(boton) {
-    console.log('desactivado');
     boton.style.color = 'black';
     menuBotonfav.classList.replace('fa-solid', 'fa-regular');
 }
@@ -84,7 +84,6 @@ function abrirMenu(punto) {
         // Mostrar menu
         menuLocalizacion.style.transform = "translateY(0)";
     } else { // sino, será un punto que viene desde Google Maps
-        // console.log(punto);
         menuImagenWrapper.style.display = "block";
         menuImagen.style.backgroundImage = "url(" + punto.photos[0].getUrl() + ')';
         menuTitulo.innerText = punto.name;
@@ -195,7 +194,6 @@ menuBotonfav.addEventListener('click', (e) => {
             ajax.onload = (e) => {
                 if (ajax.status === 200) {
                     let response = JSON.parse(ajax.response);
-                    console.log(response.status);
 
                     if (response.status == 'OK') {
                         // Se ha puesto el like, cambiar el botón
@@ -269,11 +267,11 @@ function initMap() {
 
         } else {
             // El usuario ha clicado en un punto del mapa sin punto de interés
-            console.log('Clicked on map at: ' + lat + ', ' + lng);
+            // console.log('Clicked on map at: ' + lat + ', ' + lng);
         }
     });
 
-    // Añadir marcadores de la BDD al mapa
+    // Añadir marcadores de este usuario de la BDD al mapa
     let ajax = new XMLHttpRequest();
 
     ajax.open('GET', formGetLocalizaciones.action);
@@ -282,6 +280,9 @@ function initMap() {
         if (ajax.status === 200) {
             let puntos = JSON.parse(ajax.response);
 
+            let marcadores = [];
+
+            // Mostrar puntos en el mapa
             for (let i = 0; i < puntos.length; i++) {
                 let punto = new google.maps.Marker({
                     map,
@@ -289,26 +290,47 @@ function initMap() {
                     position: { lat: 0, lng: 0 }
                 });
 
+                marcadores.push(punto);
+
+                punto.setVisible(false);
+
                 punto.addListener('click', (e) => {
                     // Menu con info aquí
                     abrirMenu(puntos[i]);
                 })
             }
+
+            // Event listener para mostrarlos
+            botonToggleFavoritos.addEventListener('click', (e) => {
+                if (botonToggleFavoritos.dataset.set == 'hidden') {
+                    for (let i = 0; i < marcadores.length; i++) {
+                        marcadores[i].setVisible(true);
+                    }
+                    botonToggleFavoritos.dataset.set = 'shown';
+                } else if (botonToggleFavoritos.dataset.set == 'shown') {
+                    for (let i = 0; i < marcadores.length; i++) {
+                        marcadores[i].setVisible(false);
+                    }
+                    botonToggleFavoritos.dataset.set = 'hidden';
+                }
+            });
         }
     }
 
     ajax.send()
 
+
+    // Guardar la posicion del usuario en un objeto en localstorage
+    const userPos = {
+        lat: "",
+        lng: "",
+    };
+
     // Actualizar la posicion del usuario en el mapa
     const watchId = navigator.geolocation.watchPosition((position) => {
             // Success callback
 
-            // Guardar la posicion del usuario en un objeto en localstorage
-            const userPos = {
-                lat: "",
-                lng: "",
-            };
-
+            // Cambiar la posicion del usuario
             userPos.lat = position.coords.latitude
             userPos.lng = position.coords.longitude
 

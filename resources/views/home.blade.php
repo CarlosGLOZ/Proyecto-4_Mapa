@@ -24,10 +24,9 @@
         <div id="mapa-main"></div>
         <div id="map-buttons">
             <div class="map-buttons-section">
-                <i class="fa-regular fa-star"></i>
-            </div>
-            <div class="map-buttons-section">
-                <i class="fa-solid fa-arrow-right-from-bracket map-button"></i>
+                {{-- <i class="fa-regular fa-star"></i> --}}
+                <i class="fa-regular fa-bookmark" id="mapa-fav-toggle" data-set="hidden"></i>
+                {{-- <i class="fa-solid fa-arrow-right-from-bracket map-button"></i> --}}
                 <i class="fa-solid fa-map-location-dot map-button" id="map-icon-button"></i>
             </div>
         </div>
@@ -50,10 +49,6 @@
             <p id="menu-localizacion-descripcion"></p>
             <p id="menu-localizacion-direccion"></p>
             <div id="menu-localizacion-tags"></div>
-        </div>
-        <div id="menu-localizacion-botones">
-            {{-- <button class="standard-button" id="menu-localizacion-botonfav"></button> --}}
-            {{-- <i class="fa-regular fa-bookmark" id="menu-localizacion-botonfav"></i> --}}
         </div>
     </div>
     @endsection
