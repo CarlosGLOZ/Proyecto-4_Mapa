@@ -24,6 +24,7 @@ function listar(filtro) {
         <div id="resultado">
         </div>
     <p >${element.nombre}</p>
+
     </div>`;
             });
             resultado.innerHTML = box;

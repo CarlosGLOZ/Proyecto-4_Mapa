@@ -34,14 +34,14 @@
     </form>
     <div class="div1" id="div1">
 
-            @foreach($gincana as $gincanas)
-
-    <div class="container" >
-        <div id="resultado">
-        </div>
-    <p >{{$gincanas->nombre}}</p>
-    </div>
-    @endforeach
+        @foreach($gincana as $gincanas)
+            <div class="container">
+                <div id="resultado">
+                </div>
+                <p>{{$gincanas->nombre}}</p>
+                <p>{{$gincanas->autor->name}}</p>
+            </div>
+        @endforeach
     </div>
 
     <!-- Agregar el primer botón -->

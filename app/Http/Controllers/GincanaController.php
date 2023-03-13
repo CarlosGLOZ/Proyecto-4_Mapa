@@ -15,8 +15,7 @@ class GincanaController extends Controller
      */
     public function index()
     {
-       $gincana=Gincana::all();
-
+        $gincana = Gincana::with('autor', 'puntos')->get();
        return view('gynkana', compact(['gincana']));
     }
 
@@ -26,9 +25,14 @@ if (!$filtro==''){
     $resu = Gincana::where('nombre', 'like', '%' . $filtro . '%')->get();
     return response()->json($resu);
 }else{
-    $resu = Gincana::where('user_id', 2)->get();
-    return response()->json($resu);
+//    $resu = Gincana::join('usuario', 'usuario.id', '=', 'gincana.user_id')
+//        ->join('punto_gincana', 'punto_gincana.id', '=', 'gincana.punto_gincana_id')
+//        ->where('user_id', 2)
+//        ->select('usuario.nombre_user', 'punto_gincana.id')
+//        ->get();
+    $resu = Gincana::with('autor', 'puntos')->where(['user_id' => 2])->get();
 
+    return $resu;
 }
 
 
