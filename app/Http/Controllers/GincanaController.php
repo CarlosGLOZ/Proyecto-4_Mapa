@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class GincanaController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -99,8 +100,5 @@ if (!$filtro==''){
      * @param  \App\Models\Gincana  $gincana
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gincana $gincana)
-    {
-        //
-    }
+
 }

@@ -23,5 +23,12 @@ Route::get('/auth/LoginRegistrar', [AuthController::class, 'showLoginRegistrar']
 Route::post('/auth/registrar', [AuthController::class, 'registrar']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 
+<<<<<<< HEAD
 Route::get('/gynkana', [GincanaController::class, 'index']);
 Route::post('listar', [GincanaController::class, 'listar']);
+=======
+
+
+//GincanaPlay
+Route::get('/gincana/GincanaPlay', [GincanaController::class, 'showGincanaPlay'])->name('gincana.GincanaPlay');
+>>>>>>> 6d00fd2733c70ce8395079fcff89a6fc9de880ae
