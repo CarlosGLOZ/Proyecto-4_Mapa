@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', [Controller::class, 'index'])->name('home');
+Route::get('/', [Controller::class, 'index'])->name('home');
 
 // Auth
 Route::get('/auth/LoginRegistrar', [AuthController::class, 'showLoginRegistrar'])->name('auth.LoginRegistrar');
@@ -26,3 +26,8 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 
 //Gincana
 Route::get('/gincana',[GincanaController::class,'crearView'])->name('gincana.crearView');
+
+Route::get('/gynkana', [GincanaController::class, 'index']);
+Route::post('listar', [GincanaController::class, 'listar']);
+Route::post('/savePista', [GincanaController::class, 'savePista'])->name('gincana.savepista');
+Route::post('/saveGin', [GincanaController::class, 'saveGin'])->name('gincana.saveGin');
