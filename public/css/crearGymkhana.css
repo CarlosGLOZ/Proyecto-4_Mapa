@@ -1,0 +1,37 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100vh;
+    align-items: center;
+}
+
+.header {
+    height: 25vh;
+    background-color: #F6F6F6;
+    width: 100%;
+    border-bottom: 2px solid black;
+    border-radius: 3%;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: top 0.3s ease-in-out;
+}
+
+.header-toggle {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#mapa-main {
+    position: absolute;
+    height: 75vh;
+    width: 100vw;
+    left: 0;
+    top: 25vh;
+    z-index: 2;
+}

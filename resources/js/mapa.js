@@ -329,7 +329,7 @@ function initMap() {
     };
 
     // Actualizar la posicion del usuario en el mapa
-    const watchId = navigator.geolocation.watchPosition((position) => {
+   /* const watchId = navigator.geolocation.watchPosition((position) => {
             // Success callback
 
             // Cambiar la posicion del usuario
@@ -341,5 +341,5 @@ function initMap() {
         },
         () => {
             // Error callback
-        });
+        });*/
 }

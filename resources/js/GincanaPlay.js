@@ -1,6 +1,7 @@
 const mainHome = document.getElementById('main-home');
 const mapaMain = document.getElementById('mapa-main');
 let mapa;
+const iconoMarcador = "ruta/de/la/imagen.png";
 
 // Initialize and add the map
 function initMap() {
@@ -14,6 +15,7 @@ function initMap() {
     // Marcador de usuario
     const marcadorUsuario = new google.maps.Marker({
         map,
+        icon: iconoMarcador
     });
 
     // Establecer el centro de la pantalla como la posicion del usuario
@@ -41,3 +43,14 @@ function initMap() {
             // Error callback
         });
 }
+
+
+
+
+//Animacion check-button
+const check = document.getElementById('check-button');
+const pista = document.getElementById('pista');
+
+check.addEventListener("click", () => {
+    pista.style.display = "flex";
+});
