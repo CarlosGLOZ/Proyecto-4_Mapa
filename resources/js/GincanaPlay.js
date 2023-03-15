@@ -1,7 +1,7 @@
 const mainHome = document.getElementById('main-home');
 const mapaMain = document.getElementById('mapa-main');
 let mapa;
-const iconoMarcador = "ruta/de/la/imagen.png";
+const iconoMarcador = "storage/img/user_icon.png";
 
 // Initialize and add the map
 function initMap() {
