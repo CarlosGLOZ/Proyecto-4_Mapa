@@ -9,6 +9,7 @@
     <title>Mapa</title>
     <script src="https://kit.fontawesome.com/2b5286e1aa.js" crossorigin="anonymous"></script>
     <link href="{{asset('css/app.css')}}" rel="stylesheet">  
+    
 
     @stack('css')
     @stack('js')
