@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', [Controller::class, 'index'])->name('home');
+Route::get('/', [Controller::class, 'index'])->name('home');
 
 // Auth
 Route::get('/auth/LoginRegistrar', [AuthController::class, 'showLoginRegistrar'])->name('auth.LoginRegistrar');
@@ -28,9 +28,8 @@ Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login')
 // Localizaciones
 Route::get('/loc/localizaciones', [LocalizacionController::class, 'get'])->name('loc.localizaciones');
 
-//GincanaPlay
-Route::get('/gincana/GincanaPlay', [GincanaController::class, 'showGincanaPlay'])->name('gincana.GincanaPlay');
 //Gincana
+Route::get('/gincana/GincanaPlay', [GincanaController::class, 'showGincanaPlay'])->name('gincana.GincanaPlay');
 Route::get('/gincana',[GincanaController::class,'crearView'])->name('gincana.crearView');
 
 // Likes
