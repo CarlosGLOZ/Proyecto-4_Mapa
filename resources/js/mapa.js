@@ -287,7 +287,7 @@ function initMap() {
                 let punto = new google.maps.Marker({
                     map,
                     title: puntos[i].nombre,
-                    position: { lat: 0, lng: 0 }
+                    position: { lat: parseFloat(puntos[i].latitud), lng: parseFloat(puntos[i].longitud) }
                 });
 
                 marcadores.push(punto);

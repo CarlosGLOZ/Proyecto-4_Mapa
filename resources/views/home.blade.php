@@ -25,7 +25,11 @@
         <div id="map-buttons">
             <div class="map-buttons-section">
                 {{-- <i class="fa-regular fa-star"></i> --}}
-                <i class="fa-regular fa-bookmark" id="mapa-fav-toggle" data-set="hidden"></i>
+                @auth
+                    <i class="fa-regular fa-bookmark" id="mapa-fav-toggle" data-set="hidden"></i>
+                @else
+                    <a href="{{ route('auth.LoginRegistrar') }}" style="color: black;"><i class="fa-solid fa-right-to-bracket"></i></a>
+                @endauth
                 {{-- <i class="fa-solid fa-arrow-right-from-bracket map-button"></i> --}}
                 <i class="fa-solid fa-map-location-dot map-button" id="map-icon-button"></i>
             </div>
