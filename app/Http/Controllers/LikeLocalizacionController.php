@@ -3,83 +3,109 @@
 namespace App\Http\Controllers;
 
 use App\Models\LikeLocalizacion;
+use App\Models\Localizacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LikeLocalizacionController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve si el usuario logueado ha dado a like a una localizacion dada
      */
-    public function index()
+    public function isLiked(Request $request)
     {
-        //
+        if (!Auth::check()) {
+            return false;
+        }
+
+        $locId = $request->input('localizacion_id'); // El ID de la localizacion
+        $tipo = $request->input('tipo_localizacion'); // El tipo de localizacion que es (BDD o Google Maps)
+
+        if ($tipo == 'BDD') {
+            $like = LikeLocalizacion::where([
+                'localizacion_id' => $locId,
+                'user_id' => auth()->user()->id,
+            ])->first();
+
+            if ($like == null) {
+                return false;
+            }
+
+            return true;
+        } elseif ($tipo == 'Google Maps') {
+            $like = LikeLocalizacion::where([
+                'localizacion_maps_id' => $locId,
+                'user_id' => auth()->user()->id,
+            ])->first();
+
+            if ($like == null) {
+                return false;
+            }
+
+            return true;
+        }
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Eliminar un like
      */
-    public function create()
+    public function destroy(Request $request)
     {
-        //
+        $locId = $request->input('id_localizacion'); // El ID de la localizacion
+        $tipo = $request->input('tipo_localizacion'); // El tipo de localizacion que es (BDD o Google Maps)
+
+        if ($tipo == 'BDD') {
+            $like = LikeLocalizacion::where([
+                'user_id' => auth()->user()->id,
+                'localizacion_id' => $locId
+            ]);
+
+            $result = $like->delete();
+
+        } elseif ($tipo == 'Google Maps') {
+
+            $like = LikeLocalizacion::where([
+                'user_id' => auth()->user()->id,
+                'localizacion_maps_id' => $locId
+            ]);
+
+            $result = $like->delete();
+        }
+
+        if ($result) {
+            return ['status' => 'OK'];
+        } else {
+            return ['status' => 'NOT OK'];
+        }
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Guardar un like
      */
     public function store(Request $request)
     {
-        //
-    }
+        $locId = $request->input('id_localizacion'); // El ID de la localizacion
+        $tipo = $request->input('tipo_localizacion'); // El tipo de localizacion que es (BDD o Google Maps)
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\LikeLocalizacion  $likeLocalizacion
-     * @return \Illuminate\Http\Response
-     */
-    public function show(LikeLocalizacion $likeLocalizacion)
-    {
-        //
-    }
+        if ($tipo == 'BDD') {
+            $localizacion = Localizacion::find($locId);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\LikeLocalizacion  $likeLocalizacion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(LikeLocalizacion $likeLocalizacion)
-    {
-        //
-    }
+            $result = $localizacion->likes()->create([
+                'user_id' => auth()->user()->id,
+            ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\LikeLocalizacion  $likeLocalizacion
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, LikeLocalizacion $likeLocalizacion)
-    {
-        //
-    }
+        } elseif ($tipo == 'Google Maps') {
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\LikeLocalizacion  $likeLocalizacion
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(LikeLocalizacion $likeLocalizacion)
-    {
-        //
+            $result = LikeLocalizacion::create([
+                'user_id' => auth()->user()->id,
+                'localizacion_maps_id' => $locId
+            ]);
+        }
+
+        if ($result) {
+            return ['status' => 'OK'];
+        } else {
+            return ['status' => 'NOT OK'];
+        }
     }
 }

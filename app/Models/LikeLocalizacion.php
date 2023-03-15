@@ -9,6 +9,12 @@ class LikeLocalizacion extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id', 
+        'localizacion_id',
+        'localizacion_maps_id'
+    ];
+
     /**
      * La localizacion a la que pertenece un like
      */
