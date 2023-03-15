@@ -16,7 +16,7 @@
     </div>
     <div class="Login" id="login">
 
-        <form action="{{ route('auth.LoginRegistrar') }}" method="get">
+        <form action="{{ route('auth.login') }}" method="post">
             @csrf
             <div class="inputs">
                 <input type="email" name="email" placeholder="Email">
@@ -36,17 +36,26 @@
     </div>
 
     <div class="Registrar" id="registrar">
-        <form name="registrar" action="{{ route('auth.LoginRegistrar') }}" method="get" onsubmit="return validarFormulario()">
+        <form name="registrar" action="{{ route('auth.registrar') }}" method="post">
             @csrf
             <div class="inputs">
                 <input type="text" name="name" placeholder="Nombre">
             </div>
+            @error('name')
+                <p>{{ $message }}</p>
+            @enderror
             <div class="inputs">
                 <input type="email" name="email" placeholder="Email">
             </div>
+            @error('email')
+                <p>{{ $message  }}</p>
+            @enderror
             <div class="inputs">
                 <input type="password" name="password" placeholder="Contraseña">
             </div>
+            @error('password')
+                <p>{{ $message  }}</p>
+            @enderror
             <div class="inputs">
                 <input type="password" name="password_confirmation" placeholder="Confirmar contraseña">
             </div>
