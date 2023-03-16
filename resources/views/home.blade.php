@@ -2,7 +2,9 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/mapa.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menuPrincipal.css') }}">
     <script src="{{ asset('../resources/js/mapa.js') }}" defer></script>
+    <script src="{{ asset('../resources/js/menu.js') }}" defer></script>
 
     {{-- Google Maps API --}}
     <script
@@ -31,7 +33,7 @@
                     <a href="{{ route('auth.LoginRegistrar') }}" style="color: black;"><i class="fa-solid fa-right-to-bracket"></i></a>
                 @endauth
                 {{-- <i class="fa-solid fa-arrow-right-from-bracket map-button"></i> --}}
-                <i class="fa-solid fa-map-location-dot map-button" id="map-icon-button"></i>
+                <i class="fa-solid fa-bars map-button" id="menu-button"></i>
             </div>
         </div>
     </div>
@@ -53,6 +55,28 @@
             <p id="menu-localizacion-descripcion"></p>
             <p id="menu-localizacion-direccion"></p>
             <div id="menu-localizacion-tags"></div>
+        </div>
+    </div>
+
+    {{-- Menu --}}
+    <div id="menu-principal">
+        <div id="menu-principal-navbar">
+            <i class="fa-solid fa-user"></i>
+            @auth
+                <p id="menu-principal-username">{{ auth()->user()->name }}</p>
+                {{-- <a href="{{ route('auth.logout') }}" style="color: black;"><i class="fa-solid fa-right-from-bracket"></i></a> --}}
+            @else
+                <p id="menu-principal-username">Guest</p>
+                <a href="{{ route('auth.LoginRegistrar') }}" style="color: black;"><i class="fa-solid fa-right-to-bracket"></i></a>
+            @endauth
+        </div>
+        <div id="menu-principal-contenidos">
+            <div id="menu-principal-header">GEOEXPLORER</div>
+            <div id="menu-principal-botones">
+                <button class="boton-menu-principal"><i class="fa-solid fa-list-ul"></i><a href="">Gymkhanas</a></button>
+                <button class="boton-menu-principal"><i class="fa-solid fa-right-from-bracket"></i><a href="{{ route('auth.logout') }}">Cerrar sesión</a></button>
+                <button class="boton-menu-principal" id="menu-principal-boton-atras"><i class="fa-solid fa-chevron-left"></i>Atrás</button>
+            </div>
         </div>
     </div>
     @endsection

@@ -24,6 +24,7 @@ Route::get('/', [Controller::class, 'index'])->name('home');
 Route::get('/auth/LoginRegistrar', [AuthController::class, 'showLoginRegistrar'])->name('auth.LoginRegistrar');
 Route::post('/auth/registrar', [AuthController::class, 'registrar'])->name('auth.registrar');
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 // Localizaciones
 Route::get('/loc/localizaciones', [LocalizacionController::class, 'get'])->name('loc.localizaciones');
