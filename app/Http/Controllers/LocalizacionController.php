@@ -4,82 +4,57 @@ namespace App\Http\Controllers;
 
 use App\Models\Localizacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LocalizacionController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve las localizaciones y sus tags de este usuario
      */
-    public function index()
+    public function get()
     {
-        //
+        if (Auth::check()) {
+            return Localizacion::with('usuario', 'tags')->where(['user_id' => auth()->user()->id])->get();
+        }
+
+        return [];
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Encuantra una localizacion de la BDD
      */
-    public function create()
+    public function find(Request $request)
     {
-        //
+        $locId = $request->input('locID');
+
+        return Localizacion::with('usuario', 'tags')->find($locId);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Página de localizacions favoritas de un usuario
      */
-    public function store(Request $request)
+    public function favoritas()
     {
-        //
+        if (!Auth::check()) {
+            return back();
+        }
+
+        $localizacionesFavoritas = auth()->user()->localizacionesGuardadas;
+
+        return view('menu.likes', compact(['localizacionesFavoritas']));
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Localizacion  $localizacion
-     * @return \Illuminate\Http\Response
+     * Devolver favoritos de la base de datos en formato JSON para JS
      */
-    public function show(Localizacion $localizacion)
+    public function asyncFavoritas()
     {
-        //
-    }
+        if (!Auth::check()) {
+            return back();
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Localizacion  $localizacion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Localizacion $localizacion)
-    {
-        //
-    }
+        $likes = auth()->user()->likes;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Localizacion  $localizacion
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Localizacion $localizacion)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Localizacion  $localizacion
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Localizacion $localizacion)
-    {
-        //
+        return $likes;
     }
 }

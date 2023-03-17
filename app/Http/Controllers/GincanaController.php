@@ -94,11 +94,8 @@ if (!$filtro==''){
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Gincana  $gincana
-     * @return \Illuminate\Http\Response
-     */
-
+    public function getGincana()
+    {
+        $restaurantes = Gincana::with(['gincana.autor', 'tags'])->get();
+    }
 }

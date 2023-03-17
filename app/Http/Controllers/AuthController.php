@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -26,7 +27,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'confirmed'
+            'password' => 'required|confirmed|min:8'
         ]);
 
         // Crear usuario
@@ -60,6 +61,16 @@ class AuthController extends Controller
         }
 
         // Redirigir
+        return redirect()->route('home');
+    }
+
+    /**
+     * Desloguear al usuario
+     */
+    public function logout()
+    {
+        Auth::logout();
+
         return redirect()->route('home');
     }
 }

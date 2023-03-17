@@ -68,50 +68,56 @@
  // Validación Login
 
  function validarFormulario() {
-     var correo = document.forms["registrar"]["email"].value;
-     var password = document.forms["registrar"]["password"].value;
-     var password_confirmation = document.forms["registrar"]["password_confirmation"].value;
-     var correoValido = validarCorreo(correo);
-     var contrasenaValida = validaPassword(password);
-     var confirmationValida = validaConfirmPassword(password, password_confirmation);
-     if (correoValido && contrasenaValida && confirmationValida) {
+     //  var correo = document.forms["registrar"]["email"].value;
+     //  var password = document.forms["registrar"]["password"].value;
+     //  var password_confirmation = document.forms["registrar"]["password_confirmation"].value;
+     //  var correoValido = validarCorreo(correo);
+     //  var contrasenaValida = validaPassword(password);
+     //  var confirmationValida = validaConfirmPassword(password, password_confirmation);
+     //  if (correoValido && contrasenaValida && confirmationValida) {
 
+     //      return true;
+     //  } else {
+
+     //      return false;
+     //  }
+
+     if (validarCorreo(document.forms["registrar"]["email"].value)) {
          return true;
-     } else {
-
-         return false;
-     }
- }
-
- function validarCorreo(correo) {
-     var expresion = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-     if (expresion.test(correo)) {
-         return true;
-     } else {
-         alert("Correo electrónico inválido");
-         return false;
-     }
- }
-
- function validaPassword(password) {
-     var expresion = /[A-Z]/;
-     // Longitud mínima de 8 caracteres y letra mayúscula
-     if (expresion.test(password) && password.length > 8) {
-         return true;
-     } else {
-         alert("Contraseña inválida");
-         return false;
      }
 
+     return false;
  }
 
- function validaConfirmPassword(password, password_confirmation) {
-     // Comprobación contraseñas
-     if (password == password_confirmation) {
-         return true;
-     } else {
-         alert("Las Contraseñas no coinciden");
-         return false;
-     }
+ //  function validarCorreo(correo) {
+ //      var expresion = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+ //      if (expresion.test(correo)) {
+ //          return true;
+ //      } else {
+ //          alert("Correo electrónico inválido");
+ //          return false;
+ //      }
+ //  }
 
- }
+ //  function validaPassword(password) {
+ //      var expresion = /[A-Z]/;
+ //      // Longitud mínima de 8 caracteres y letra mayúscula
+ //      if (expresion.test(password) && password.length > 8) {
+ //          return true;
+ //      } else {
+ //          alert("Contraseña inválida");
+ //          return false;
+ //      }
+
+ //  }
+
+ //  function validaConfirmPassword(password, password_confirmation) {
+ //      // Comprobación contraseñas
+ //      if (password == password_confirmation) {
+ //          return true;
+ //      } else {
+ //          alert("Las Contraseñas no coinciden");
+ //          return false;
+ //      }
+
+ //  }
