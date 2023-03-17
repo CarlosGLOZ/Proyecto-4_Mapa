@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\SalaGincana;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,10 @@ class SalaGincanaController extends Controller
     {
         return view('salasgincanas');
     }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.

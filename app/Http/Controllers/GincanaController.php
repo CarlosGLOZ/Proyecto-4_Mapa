@@ -17,7 +17,7 @@ class GincanaController extends Controller
     public function index()
     {
         $gincana = Gincana::with('autor', 'puntos')->get();
-       return view('gynkana', compact(['gincana']));
+           return view('gynkana', compact(['gincana']));
     }
 
     public function listar(Request $request) {
@@ -36,6 +36,10 @@ if (!$filtro==''){
     return $resu;
 }
 
+
+    }
+
+    public function find(){
 
     }
 
