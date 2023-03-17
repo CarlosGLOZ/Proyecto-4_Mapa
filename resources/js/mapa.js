@@ -89,18 +89,7 @@ function abrirMenu(punto) {
         menuTitulo.innerText = punto.name;
         menuAutor.innerText = 'Google Maps';
         menuDescripcion.style.display = 'none';
-
-        // Parsear direccion
-        let direccion = '';
-        for (let i = 0; i < punto.address_components.length; i++) {
-            if (i == punto.address_components.length - 1) {
-                direccion = direccion + punto.address_components[i].short_name;
-            } else {
-                direccion = direccion + punto.address_components[i].short_name + ', ';
-            }
-        }
-
-        menuDireccion.innerText = direccion;
+        menuDireccion.innerText = punto.formatted_address;
         menuBotonfav.dataset.id = punto.place_id;
 
         // Añadir tags
@@ -329,7 +318,7 @@ function initMap() {
     };
 
     // Actualizar la posicion del usuario en el mapa
-   /* const watchId = navigator.geolocation.watchPosition((position) => {
+    const watchId = navigator.geolocation.watchPosition((position) => {
             // Success callback
 
             // Cambiar la posicion del usuario
@@ -341,5 +330,5 @@ function initMap() {
         },
         () => {
             // Error callback
-        });*/
+        });
 }

@@ -28,6 +28,9 @@ Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout
 
 // Localizaciones
 Route::get('/loc/localizaciones', [LocalizacionController::class, 'get'])->name('loc.localizaciones');
+Route::get('/loc/favoritas', [LocalizacionController::class, 'favoritas'])->name('loc.favoritas');
+Route::get('/loc/asyncFavoritas', [LocalizacionController::class, 'asyncFavoritas'])->name('loc.asyncFavoritas');
+Route::post('/loc/find', [LocalizacionController::class, 'find'])->name('loc.find');
 
 //Gincana
 Route::get('/gincana/GincanaPlay', [GincanaController::class, 'showGincanaPlay'])->name('gincana.GincanaPlay');

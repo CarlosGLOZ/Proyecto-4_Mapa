@@ -3,6 +3,7 @@
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/mapa.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menuPrincipal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menuLocalizacion.css') }}">
     <script src="{{ asset('../resources/js/mapa.js') }}" defer></script>
     <script src="{{ asset('../resources/js/menu.js') }}" defer></script>
 
@@ -58,7 +59,7 @@
         </div>
     </div>
 
-    {{-- Menu --}}
+    {{-- Menu Principal--}}
     <div id="menu-principal">
         <div id="menu-principal-navbar">
             <i class="fa-solid fa-user"></i>
@@ -74,7 +75,12 @@
             <div id="menu-principal-header">GEOEXPLORER</div>
             <div id="menu-principal-botones">
                 <button class="boton-menu-principal"><i class="fa-solid fa-list-ul"></i><a href="">Gymkhanas</a></button>
-                <button class="boton-menu-principal"><i class="fa-solid fa-right-from-bracket"></i><a href="{{ route('auth.logout') }}">Cerrar sesión</a></button>
+                @auth
+                    <button class="boton-menu-principal"><i class="fa-solid fa-bookmark"></i><a href="{{ route('loc.favoritas') }}">Guardadas</a></button>
+                    <button class="boton-menu-principal"><i class="fa-solid fa-right-from-bracket"></i><a href="{{ route('auth.logout') }}">Cerrar sesión</a></button>
+                @else
+                    <button class="boton-menu-principal"><i class="fa-solid fa-right-to-bracket"></i><a href="{{ route('auth.LoginRegistrar') }}">Iniciar sesión</a></button>
+                @endauth
                 <button class="boton-menu-principal" id="menu-principal-boton-atras"><i class="fa-solid fa-chevron-left"></i>Atrás</button>
             </div>
         </div>
