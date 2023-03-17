@@ -33,13 +33,12 @@ Route::get('/loc/favoritas', [LocalizacionController::class, 'favoritas'])->name
 Route::get('/loc/asyncFavoritas', [LocalizacionController::class, 'asyncFavoritas'])->name('loc.asyncFavoritas');
 Route::post('/loc/find', [LocalizacionController::class, 'find'])->name('loc.find');
 
-Route::get('/gynkana', [GincanaController::class, 'index']);
-Route::post('listar', [GincanaController::class, 'listar']);
-Route::get('/salasgincanas', [SalaGincanaController::class, 'index']);
-
 //Gincana
 Route::get('/gincana/GincanaPlay', [GincanaController::class, 'showGincanaPlay'])->name('gincana.GincanaPlay');
-Route::get('/gincana',[GincanaController::class,'crearView'])->name('gincana.crearView');
+Route::get('/gincana/crear',[GincanaController::class,'crearView'])->name('gincana.crearView');
+Route::get('/gincana/lista', [GincanaController::class, 'index'])->name('gincana.lista');
+Route::post('/gincana/filtrar', [GincanaController::class, 'fitrar'])->name('gincana.filtrar');
+Route::get('/gincana/{id}', [GincanaController::class, 'find'])->name('gincana.find');
 
 // Likes
 Route::post('/loc/liked', [LikeLocalizacionController::class, 'isLiked'])->name('loc.liked');

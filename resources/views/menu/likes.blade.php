@@ -34,7 +34,7 @@
         </div>
         <div id="menu-principal-contenidos">
             <div id="menu-principal-header">GUARDADAS</div>
-            <div id="menu-principal-botones">
+            <div class="menu-principal-botones">
                 <button class="boton-menu-principal" id="menu-principal-boton-atras"><i class="fa-solid fa-chevron-left"></i><a href="{{ route('home') }}">Atrás</a></button>
                 @foreach ($localizacionesFavoritas as $loc)
                     <button class="boton-menu-principal localizacion-guardada boton-loc-bdd" data-id="{{ $loc->id }}">

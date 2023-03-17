@@ -74,7 +74,7 @@
         <div id="menu-principal-contenidos">
             <div id="menu-principal-header">GEOEXPLORER</div>
             <div id="menu-principal-botones">
-                <button class="boton-menu-principal"><i class="fa-solid fa-list-ul"></i><a href="">Gymkhanas</a></button>
+                <button class="boton-menu-principal"><i class="fa-solid fa-list-ul"></i><a href="{{ route('gincana.lista') }}">Gymkhanas</a></button>
                 @auth
                     <button class="boton-menu-principal"><i class="fa-solid fa-bookmark"></i><a href="{{ route('loc.favoritas') }}">Guardadas</a></button>
                     <button class="boton-menu-principal"><i class="fa-solid fa-right-from-bracket"></i><a href="{{ route('auth.logout') }}">Cerrar sesión</a></button>
