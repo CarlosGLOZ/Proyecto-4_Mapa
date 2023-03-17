@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\LikeLocalizacionController;
 use App\Http\Controllers\LocalizacionController;
 use App\Http\Controllers\GincanaController;
+use App\Http\Controllers\SalaGincanaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,10 @@ Route::get('/loc/localizaciones', [LocalizacionController::class, 'get'])->name(
 Route::get('/loc/favoritas', [LocalizacionController::class, 'favoritas'])->name('loc.favoritas');
 Route::get('/loc/asyncFavoritas', [LocalizacionController::class, 'asyncFavoritas'])->name('loc.asyncFavoritas');
 Route::post('/loc/find', [LocalizacionController::class, 'find'])->name('loc.find');
+
+Route::get('/gynkana', [GincanaController::class, 'index']);
+Route::post('listar', [GincanaController::class, 'listar']);
+Route::get('/salasgincanas', [SalaGincanaController::class, 'index']);
 
 //Gincana
 Route::get('/gincana/GincanaPlay', [GincanaController::class, 'showGincanaPlay'])->name('gincana.GincanaPlay');

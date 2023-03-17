@@ -1,0 +1,144 @@
+/* Establecer valores por defecto para el modelo de caja y los márgenes y el relleno de todos los elementos */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Establecer el tipo de letra predeterminado y el color de fondo para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    overflow: auto;
+}
+
+/* Estilo para la barra de navegación */
+.navbar {
+    display: flex;
+    margin-top: 3%;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    color: black;
+    height: 50px;
+    padding: 0 10px;
+}
+
+/* Estilo para el título en la barra de navegación */
+.navbar h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+/* Estilo para los botones en la barra de navegación */
+.navbar button {
+    background-color: #fff;
+    border: none;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Estilo para el contenedor principal */
+.div1 {
+    background-color: whitesmoke;
+    height: 90vh;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    margin: 10px;
+    overflow: auto; /* Agregar scroll al div1 */
+    scrollbar-width: thin; /* Ancho de scrollbar personalizado */
+}
+
+/* Estilo para la caja de búsqueda */
+.search-box input[type="text"] {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    transition: all 0.3s ease-in-out;
+}
+
+.search-box input[type="text"]:focus {
+    border-bottom: 2px solid #4CAF50;
+}
+
+.search-box p {
+    text-align: center;
+    margin-top: 4px;
+    font-size: 18px;
+}
+
+/* Estilo para el contenedor secundario */
+.container {
+    background-color: #ccc;
+    padding: 10px;
+    margin: 20px auto;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.container p {
+    margin: 0;
+    padding: 10px;
+}
+
+/* Estilo para el botón de búsqueda */
+.search-box #button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.search-box #button:hover {
+    background-color: #3e8e41;
+}
+
+.boton-abajo-derecha {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 7px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+
+.boton-abajo-derecha + .boton-abajo-derecha {
+    bottom: 70px;
+}
+
+.boton1{
+    margin: 9px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 7px 10px;
+    text-align: left;
+    background-position: 10px center;
+
+
+}
+
+

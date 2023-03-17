@@ -14,7 +14,7 @@ class SalaGincanaController extends Controller
      */
     public function index()
     {
-        //
+        return view('salasgincanas');
     }
 
     /**
