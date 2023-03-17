@@ -48,9 +48,10 @@
 
 
     <!-- Agregar el segundo botón -->
-    <button class="boton-abajo-derecha"><i class="fa-regular fa-plus"></i></button>
+
 
 </div>
+<button class="boton-abajo-derecha"><i class="fa-regular fa-plus"></i></button>
 
 
 

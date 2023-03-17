@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.header {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 6px;
+}
+h1 {
+margin: 1%;
+    margin-left: 2%;
+    margin-top: 7%;
+    font-size: 20px;
+    font-weight: normal;
+    display: inline-block;
+
+}
+.main {
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+    margin-top: 7px;
+    border-radius: 6px;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+p {
+    margin: 0;
+    font-size: 16px;
+    margin-top: 10%;
+}
+.button {
+    background-color: green;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10%;
+}
+.button:hover {
+    background-color: darkgreen;
+}
+.sidebar {
+    background-color: #f2f2f2;
+    padding: 20px;
+    float: left;
+    width: 20%;
+    height: 100%;
+}
+.salas {
+    margin-top: 8%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    height: auto;
+    border-radius: 15px;
+}
+
+.rectangulo {
+    margin: 10%;
+    margin-left: 20%;
+    background-color: grey;
+    width: 60%;
+    height: 30%;
+    padding: 7px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 5px;
+}
+.sidebar p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.puntos {
+    justify-content: space-between;
+    margin-top: 7%;
+    display: flex;
+
+}
+.footer {
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+}
+h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: normal;
+}
+.box {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+.box p {
+    font-size: 20px;
+}

@@ -14,7 +14,7 @@ class SalaController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

@@ -9,6 +9,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: white;
+    overflow: auto;
 }
 
 /* Estilo para la barra de navegación */
@@ -50,6 +51,8 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 10px;
     margin: 10px;
+    overflow: auto; /* Agregar scroll al div1 */
+    scrollbar-width: thin; /* Ancho de scrollbar personalizado */
 }
 
 /* Estilo para la caja de búsqueda */

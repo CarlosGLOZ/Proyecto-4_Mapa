@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\GincanaController;
+use App\Http\Controllers\SalaGincanaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,7 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::get('/gynkana', [GincanaController::class, 'index']);
 Route::post('listar', [GincanaController::class, 'listar']);
-
+Route::get('/salasgincanas', [SalaGincanaController::class, 'index']);
 
 
 
