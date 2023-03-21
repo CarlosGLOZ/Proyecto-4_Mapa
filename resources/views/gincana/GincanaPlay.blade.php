@@ -11,6 +11,9 @@
 
 @section('content')
 
+{{-- Formulario vacío para recoger el action en el JS --}}
+<form action="{{ route('gincana.find', $id) }}" method="get" id="form-get-puntos"></form>
+
 <div id="main-home">
     <x-navbar />
     <div id="mapa-main"></div>
@@ -22,13 +25,11 @@
             </div>
             <div class="logout">
                 <i class="fa-solid fa-arrow-rotate-left"></i>
-
-
             </div><br>
-
         </div>
 
         <div class="gincana">
+            <p ></p>
             <p>Gincana</p>
         </div>
 
@@ -40,13 +41,15 @@
         </div>
 
         <div class="desplegable" >
-            <p>jaksdjflñkjasdfñlkjasasdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadf</p>
+         
+            <p id="pista-texto"></p>
         </div>
 
     </div>
     <div id="map-buttons">
         <div class="map-buttons-section" id="check-button">
-            <p>Check</p> <i class="fa-solid fa-check check-button"></i>
+            <button><p>Check</p><i class="fa-solid fa-check check-button"></i></button>
+            
         </div>
     </div>
 </div>

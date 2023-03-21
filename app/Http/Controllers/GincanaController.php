@@ -37,16 +37,14 @@ class GincanaController extends Controller
 
     public function find($id)
     {
-        $gincana = Gincana::with('autor', 'salas', 'puntos')->find($id);
-
-        return $gincana;
+       return Gincana::with('autor', 'puntos', 'salas')->find($id);
     }
 
     /**
-     * Esta función parece que no se usa para nada??
+     * Pagina de gincana dentro de una sala
      */
-    public function getGincana()
+    public function showGincanaPlay($id)
     {
-        $restaurantes = Gincana::with(['gincana.autor', 'tags'])->get();
+        return view('gincana.GincanaPlay', compact(['id']));
     }
 }

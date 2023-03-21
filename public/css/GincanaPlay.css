@@ -188,13 +188,18 @@
     justify-content: center;
 }
 
-.check-button {
+.map-buttons-section button {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    color: white;
     display: flex;
-    align-items: center;
-    padding: 5%;
+    justify-content: center;
+    font-size: 1.2em;
 }
 
-.check-button p {
-    padding-left: 8%;
-    color: white;
+.map-buttons-section button i {
+    margin-left: 5%;
 }
