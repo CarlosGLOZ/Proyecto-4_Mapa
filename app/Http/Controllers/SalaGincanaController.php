@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 class SalaGincanaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Pagina de la sala.
      */
-    public function index()
+    public function view($id)
     {
-        return view('salasgincanas');
+        $sala = SalaGincana::with('gincana', 'jugadores', 'creador')->find($id);
+
+        return view('sala.view', compact(['sala']));
     }
 }

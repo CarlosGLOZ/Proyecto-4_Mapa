@@ -17,6 +17,9 @@ body {
   overflow: hidden;
   font-family: 'Inter', sans-serif;
 }
+a {
+  color: black;
+}
 .standard-button {
   height: 48px;
   border: solid;

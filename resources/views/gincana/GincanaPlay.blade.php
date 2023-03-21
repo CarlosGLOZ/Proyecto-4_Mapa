@@ -3,6 +3,7 @@
 @push('css')
 <link rel="stylesheet" href="{{asset('css/GincanaPlay.css')}}">
 <script src="{{ asset('../resources/js/GincanaPlay.js') }}" defer></script>
+<script src="{{ asset('../resources/js/sala.js') }}" defer></script>
 
 {{-- Google Maps API --}}
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy0Ba3CPpNH48X3toUBGCrgQhaEvxaZks&callback=initMap&v=weekly" defer></script>

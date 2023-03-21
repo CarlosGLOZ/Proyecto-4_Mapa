@@ -16,6 +16,7 @@ class CreateGincanasTable extends Migration
         Schema::create('gincanas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->text('descripcion');
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
