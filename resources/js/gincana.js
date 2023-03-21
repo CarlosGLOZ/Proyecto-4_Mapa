@@ -3,19 +3,13 @@ const gincanasContainer = document.getElementById('menu-gincanas');
 const formGincanasFiltrar = document.getElementById('menu-gincanas-filtros');
 const formGincanasFind = document.getElementById('form-gincanas-find');
 
-var csrf_token = document.getElementById('_token').content;
-// window.onload = function() {
-//     let button = document.getElementById("button");
-//     button.addEventListener('click', function(e) {
-//         listar('');
-//     })
-// }
+const inputFiltrarNombre = document.getElementById('menu-gincanas-filtro-nombre');
+const botonFiltrarPropiasToggle = document.getElementById('gincana-propia-toggle');
 
-
-function listar(filtro) {
-    // let resultado = document.getElementById("div1");
+function listar(filtro, propias = 'false') {
     let formData = new FormData(formGincanasFiltrar);
     formData.append('filtro', filtro);
+    formData.append('propias', propias);
 
     const ajax = new XMLHttpRequest();
 
@@ -25,10 +19,12 @@ function listar(filtro) {
         if (ajax.status == 200) {
             let gincanas = JSON.parse(ajax.response);
 
-            console.log(gincanas);
+            // Limpiar gincanas actuales
+            gincanasContainer.innerHTML = "";
+
             for (let i = 0; i < gincanas.length; i++) {
                 let box = document.createElement('div');
-                box.className = "boton-menu-principal gincana-contenedor";
+                box.className = "boton-menu-principal gincana-contenedor localizacion-guardada";
 
                 // Icono de la gincana
                 let icono = document.createElement('i');
@@ -38,18 +34,13 @@ function listar(filtro) {
                 // Datos de la gincana
                 let datos = document.createElement('div');
                 datos.className = "gincana-datos";
-
-                //      Nombre de la gincana
-                let nombre = document.createElement('p');
-                nombre.className = "gincana-titulo";
-                nombre.innerText = gincanas[i].nombre;
-                datos.appendChild(nombre);
+                datos.innerText = gincanas[i].nombre;
 
                 //      Nombre del autor de la gincana
                 let autor = document.createElement('p');
-                autor.className = "gincana-autor";
+                autor.className = "gincana-autor loc-coordenadas";
                 autor.innerText = gincanas[i].autor.name;
-                datos.appendChild(nombre);
+                datos.appendChild(autor);
 
                 box.appendChild(datos);
 
@@ -61,16 +52,6 @@ function listar(filtro) {
                 gincanasContainer.appendChild(box);
             }
 
-            // admins.forEach(element => {
-            //     box += ` <div class="container" >
-            //         <div id="resultado">
-            //         </div>
-            //     <p >${element.nombre}</p>
-
-            //     </div>`;
-            // });
-            // resultado.innerHTML = box;
-
         } else {
             resultado.innerText = 'Error';
         }
@@ -79,16 +60,35 @@ function listar(filtro) {
     ajax.send(formData);
 }
 
+function activarFiltroToggle(el) {
+    el.classList.replace('boton-toggle-inactivo', 'boton-toggle-activo');
+    el.dataset.activo = "true";
+}
+
+function desactivarFiltroToggle(el) {
+    el.classList.replace('boton-toggle-activo', 'boton-toggle-inactivo');
+    el.dataset.activo = "false";
+}
+
 listar('');
 
-let buscar = document.getElementById("buscar");
-
-buscar.addEventListener("keyup", () => {
-    let filtro = buscar.value;
-    console.log(filtro);
-    if (filtro == "") {
-        listar('');
-    } else {
-        listar(filtro);
-    }
+// Prevenir el submit del formulario de filtros
+formGincanasFiltrar.addEventListener('submit', (e) => {
+    e.preventDefault();
 });
+
+// Filtrar las gincanas del usuario
+botonFiltrarPropiasToggle.addEventListener('click', (e) => {
+    inputFiltrarNombre.value = null;
+    if (botonFiltrarPropiasToggle.dataset.activo == "true") {
+        desactivarFiltroToggle(botonFiltrarPropiasToggle);
+    } else {
+        activarFiltroToggle(botonFiltrarPropiasToggle);
+    }
+    listar(inputFiltrarNombre.value, botonFiltrarPropiasToggle.dataset.activo);
+})
+
+// Filtrar gincanas según nombre
+inputFiltrarNombre.addEventListener('input', (e) => {
+    listar(inputFiltrarNombre.value, botonFiltrarPropiasToggle.dataset.activo);
+})
