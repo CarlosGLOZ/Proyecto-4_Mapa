@@ -329,17 +329,17 @@ function initMap() {
     };
 
     // Actualizar la posicion del usuario en el mapa
-   /* const watchId = navigator.geolocation.watchPosition((position) => {
-            // Success callback
+    /* const watchId = navigator.geolocation.watchPosition((position) => {
+             // Success callback
 
-            // Cambiar la posicion del usuario
-            userPos.lat = position.coords.latitude
-            userPos.lng = position.coords.longitude
+             // Cambiar la posicion del usuario
+             userPos.lat = position.coords.latitude
+             userPos.lng = position.coords.longitude
 
-            // Reestablecer posicion del usuario en el mapa
-            marcadorUsuario.setPosition(userPos);
-        },
-        () => {
-            // Error callback
-        });*/
+             // Reestablecer posicion del usuario en el mapa
+             marcadorUsuario.setPosition(userPos);
+         },
+         () => {
+             // Error callback
+         });*/
 }
