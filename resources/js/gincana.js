@@ -19,10 +19,10 @@ function listar(filtro, propias = 'false') {
         if (ajax.status == 200) {
             let gincanas = JSON.parse(ajax.response);
 
-            for (let i = 0; i < gincanas.length; i++) {
-                // Limpiar gincanas actuales
-                gincanasContainer.innerHTML = "";
+            // Limpiar gincanas actuales
+            gincanasContainer.innerHTML = "";
 
+            for (let i = 0; i < gincanas.length; i++) {
                 let box = document.createElement('div');
                 box.className = "boton-menu-principal gincana-contenedor localizacion-guardada";
 
@@ -67,7 +67,7 @@ function activarFiltroToggle(el) {
 
 function desactivarFiltroToggle(el) {
     el.classList.replace('boton-toggle-activo', 'boton-toggle-inactivo');
-    el.dataset.activo = "flase";
+    el.dataset.activo = "false";
 }
 
 listar('');
@@ -79,10 +79,16 @@ formGincanasFiltrar.addEventListener('submit', (e) => {
 
 // Filtrar las gincanas del usuario
 botonFiltrarPropiasToggle.addEventListener('click', (e) => {
+    inputFiltrarNombre.value = null;
     if (botonFiltrarPropiasToggle.dataset.activo == "true") {
         desactivarFiltroToggle(botonFiltrarPropiasToggle);
     } else {
         activarFiltroToggle(botonFiltrarPropiasToggle);
     }
-    listar(inputFiltrarNombre.ariaValueMax, botonFiltrarPropiasToggle.dataset.activo);
+    listar(inputFiltrarNombre.value, botonFiltrarPropiasToggle.dataset.activo);
+})
+
+// Filtrar gincanas según nombre
+inputFiltrarNombre.addEventListener('input', (e) => {
+    listar(inputFiltrarNombre.value, botonFiltrarPropiasToggle.dataset.activo);
 })

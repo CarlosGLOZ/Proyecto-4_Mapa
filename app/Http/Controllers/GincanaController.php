@@ -26,7 +26,7 @@ class GincanaController extends Controller
         $propias = $request->input('propias');
 
         if ($propias == 'true') {
-            $resu = Gincana::with('autor', 'puntos')->where(['user_id' => auth()->user()->id])->get();
+            $resu = Gincana::with('autor', 'puntos')->where(['user_id' => auth()->user()->id])->where('nombre', 'like', $filtro.'%')->get();
         } else {
             $resu = Gincana::with('autor', 'puntos')->where('nombre', 'like', $filtro.'%')->get();
         }

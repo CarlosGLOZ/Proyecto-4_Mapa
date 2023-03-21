@@ -24,14 +24,18 @@
         </div>
         <div id="menu-principal-contenidos">
             <div id="menu-principal-header">GYMKHANAS</div>
-            <form action="{{ route('gincana.filtrar') }}" method="POST" id="menu-gincanas-filtros">
-                @csrf
-                <input type="text" name="buscar" id="menu-gincanas-filtro-nombre" placeholder="Buscar...">
-                <button class="boton-toggle-inactivo" id="gincana-propia-toggle" data-activo="false">Mis Gincanas</button>
-            </form>
-            <div id="menu-gincanas" class="menu-principal-botones">
-                <button class="boton-menu-principal" id="menu-principal-boton-atras"><i class="fa-solid fa-chevron-left"></i><a href="{{ route('home') }}">Atrás</a></button>
-
+            <div>
+                <form action="{{ route('gincana.filtrar') }}" method="POST" id="menu-gincanas-filtros">
+                    @csrf
+                    <input type="text" name="buscar" id="menu-gincanas-filtro-nombre" placeholder="Buscar...">
+                    @auth
+                        <button class="boton-toggle-inactivo" id="gincana-propia-toggle" data-activo="false">Mis Gincanas</button>
+                    @endauth
+                </form>
+                <div id="menu-gincanas" class="menu-principal-botones">
+                    <button class="boton-menu-principal" id="menu-principal-boton-atras"><i class="fa-solid fa-chevron-left"></i><a href="{{ route('home') }}">Atrás</a></button>
+    
+                </div>
             </div>
         </div>
     </div>

@@ -16,7 +16,7 @@
   border-bottom: solid black 2px;
   font-size: 36px;
   width: 100%;
-  padding: 0px 20px;
+  padding: 10px 20px;
 }
 #gincana-propia-toggle {
   width: 100%;
@@ -34,17 +34,9 @@
   transition-duration: 0.3s;
   color: black;
 }
-.boton-toggle-inactivo:hover {
-  background-color: black;
-  color: white;
-}
 .boton-toggle-activo {
   background-color: black;
   cursor: pointer;
   transition-duration: 0.3s;
   color: white;
-}
-.boton-toggle-activo:hover {
-  background-color: transparent;
-  color: black;
 }
