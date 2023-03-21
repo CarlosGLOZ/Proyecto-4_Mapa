@@ -39,7 +39,7 @@ class GincanaController extends Controller
     {
         $gincana = Gincana::with('autor', 'salas', 'puntos')->find($id);
 
-        // return 
+        return $gincana;
     }
 
     /**

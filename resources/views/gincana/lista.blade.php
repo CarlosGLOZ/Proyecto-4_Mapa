@@ -24,6 +24,7 @@
         </div>
         <div id="menu-principal-contenidos">
             <div id="menu-principal-header">GYMKHANAS</div>
+            <button class="boton-menu-principal" id="menu-principal-boton-atras"><i class="fa-solid fa-chevron-left"></i><a href="{{ route('home') }}">Atrás</a></button>
             <div>
                 <form action="{{ route('gincana.filtrar') }}" method="POST" id="menu-gincanas-filtros">
                     @csrf
