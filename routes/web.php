@@ -38,9 +38,13 @@ Route::get('/gincana/crear',[GincanaController::class,'crearView'])->name('ginca
 Route::get('/gincana/lista', [GincanaController::class, 'index'])->name('gincana.lista');
 Route::post('/gincana/filtrar', [GincanaController::class, 'fitrar'])->name('gincana.filtrar');
 Route::get('/gincana/{id}', [GincanaController::class, 'find'])->name('gincana.find');
-
-Route::get('/gincana/GincanaPlay/{id}', [GincanaController::class, 'showGincanaPlay'])->name('gincana.GincanaPlay');
 Route::get('/gincana/find/{id}', [GincanaController::class, 'find'])->name('gincana.find');
+
+// Sala
+Route::get('/sala/{id}', [SalaGincanaController::class, 'view'])->name('sala.view');
+Route::post('/sala/estado/{sala}', [SalaGincanaController::class, 'estado'])->name('sala.estado');
+Route::get('/sala/jugar/{id}', [SalaGincanaController::class, 'jugar'])->name('sala.jugar'); // ANTERIORMENTE GincanaPlay
+Route::post('/sala/acceso/{sala}', [SalaGincanaController::class, 'acceso'])->name('sala.acceso');
 
 // Likes
 Route::post('/loc/liked', [LikeLocalizacionController::class, 'isLiked'])->name('loc.liked');

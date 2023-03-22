@@ -17,7 +17,7 @@ class CreateSalaGincanasTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('gincana_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->string('codigo_entrada');
+            $table->tinyInteger('activa')->default(0);
             $table->text('password')->nullable();
             $table->timestamps();
         });
