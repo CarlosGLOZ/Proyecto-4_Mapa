@@ -12,7 +12,7 @@
 
 @section('content')
     {{-- Formularios escondidos para JS --}}
-    <form action="{{ route('gincana.find', '') }}" method="get" id="form-gincanas-find"></form>
+    <form action="{{ route('gincana.view', '') }}" method="get" id="form-gincanas-find"></form>
     <form action="{{ route('sala.acceso', $sala) }}" method="post" id="form-sala-acceso">@csrf</form>
 
     {{-- Menu Principal --}}
@@ -44,11 +44,11 @@
                         </form>
                     @endif
                 @endcan
-                
+
                 @if ($sala->activa)
                 <a href="{{ route('sala.jugar', $sala) }}" style="width: 100%;"><button id="menu-sala-jugar" class="boton-verde">Unirse al juego</button></a>
                 @endif
-                
+
                 @can('jugador', $sala)
                     {{-- El usuario es jugador de la gincana --}}
                     <button id="menu-sala-unirse">Abandonar</button>

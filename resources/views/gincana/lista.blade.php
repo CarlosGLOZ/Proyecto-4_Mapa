@@ -8,7 +8,7 @@
 
 @section('content')
     {{-- Formularios escondidos para JS --}}
-    <form action="{{ route('gincana.find', '') }}" method="get" id="form-gincanas-find"></form>
+    <form action="{{ route('gincana.view', '') }}" method="get" id="form-gincanas-find"></form>
 
     {{-- Menu Principal --}}
     <div id="menu-principal" style="transform: translateX(0)">
