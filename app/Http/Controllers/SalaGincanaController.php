@@ -28,7 +28,7 @@ class SalaGincanaController extends Controller
 
         // Si la sala no está activa o el jugador es parte de ella, redirigirlo al juego
         if (!$sala->activa || !$sala->jugadores->contains('id', auth()->user()->id)) {
-            redirect()->route('sala.view');
+            return redirect()->route('sala.view', $id);
         }
 
         return view('sala.jugar', compact(['sala']));
