@@ -17,6 +17,7 @@ class CreateJugadorGincanasTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('sala_gincanas_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('ultimo')->default(0);
             $table->timestamps();
         });
     }

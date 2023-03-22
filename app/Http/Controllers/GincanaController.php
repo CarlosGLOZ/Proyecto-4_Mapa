@@ -8,19 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class GincanaController extends Controller
 {
-
-    /**
+   /**
      * Pagina de gincanas.
      */
     public function index()
     {
-
-        $gincana = Gincana::with('autor', 'puntos')->get();
-           return view('gynkana', compact(['gincana']));
-
         // $gincanas = Gincana::with('autor', 'puntos')->get();
         return view('gincana.lista');
-
     }
 
     /**
@@ -31,25 +25,12 @@ class GincanaController extends Controller
         $propias = $request->input('propias');
 
         if ($propias == 'true') {
-            $resu = Gincana::with('autor', 'puntos')->where(['user_id' => auth()->user()->id])->get();
+            $resu = Gincana::with('autor', 'puntos')->where(['user_id' => auth()->user()->id])->where('nombre', 'like', $filtro.'%')->get();
         } else {
             $resu = Gincana::with('autor', 'puntos')->where('nombre', 'like', $filtro.'%')->get();
         }
 
         return $resu;
-    }
-
-
-
-    public function create()
-    {
-        //
-    }
-
-
-    public function store(Request $request)
-    {
-        //
     }
 
 
@@ -61,11 +42,8 @@ class GincanaController extends Controller
         return view('gincana.salas', compact(['salas1']));
     }
 
-    /**
-     * Esta función parece que no se usa para nada??
-     */
-    public function getGincana()
+    public function find($id)
     {
-        $restaurantes = Gincana::with(['gincana.autor', 'tags'])->get();
+       return Gincana::with('autor', 'puntos', 'salas')->find($id);
     }
 }

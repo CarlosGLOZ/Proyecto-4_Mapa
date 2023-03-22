@@ -1,7 +1,11 @@
 const mainHome = document.getElementById('main-home');
 const mapaMain = document.getElementById('mapa-main');
+const formgetpuntos = document.getElementById('form-get-puntos');
+const pista_texto = document.getElementById('pista-texto');
+
 let mapa;
-const iconoMarcador = "ruta/de/la/imagen.png";
+
+
 
 // Initialize and add the map
 function initMap() {
@@ -15,13 +19,16 @@ function initMap() {
     // Marcador de usuario
     const marcadorUsuario = new google.maps.Marker({
         map,
-        icon: iconoMarcador
+
     });
 
     // Establecer el centro de la pantalla como la posicion del usuario
     navigator.geolocation.getCurrentPosition((position) => {
         map.setCenter({ lat: position.coords.latitude, lng: position.coords.longitude });
     });
+
+
+    //Establecer el centro de 
 
     // Actualizar la posicion del usuario en el mapa
     const watchId = navigator.geolocation.watchPosition((position) => {
@@ -45,12 +52,39 @@ function initMap() {
 }
 
 
+//Recoger Json puntos
+
+const ajax = new XMLHttpRequest();
+ajax.open('GET', formgetpuntos.action);
+
+ajax.onload = (e) => {
+
+    if (ajax.status === 200) {
+        let gincana = JSON.parse(ajax.response);
+        console.log(gincana.puntos);
 
 
-//Animacion check-button
-const check = document.getElementById('check-button');
+    }
+}
+
+ajax.send();
+
+
+//Animacion aparición pista
+
 const pista = document.getElementById('pista');
+const check = document.getElementById('check-button');
+
+function Pista() {
+    pista.style.display = "flex";
+}
 
 check.addEventListener("click", () => {
-    pista.style.display = "flex";
+    Pista();
 });
+
+
+window.onload = function() {
+
+    Pista();
+}
