@@ -13,7 +13,7 @@
 @section('content')
 
 {{-- Formulario vacío para recoger el action en el JS --}}
-<form action="{{ route('gincana.find', $id) }}" method="get" id="form-get-puntos"></form>
+<form action="{{ route('gincana.find', $sala->gincana->id) }}" method="get" id="form-get-puntos"></form>
 
 <div id="main-home">
     <x-navbar />

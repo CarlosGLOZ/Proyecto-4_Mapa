@@ -39,12 +39,4 @@ class GincanaController extends Controller
     {
        return Gincana::with('autor', 'puntos', 'salas')->find($id);
     }
-
-    /**
-     * Pagina de gincana dentro de una sala
-     */
-    public function showGincanaPlay($id)
-    {
-        return view('gincana.GincanaPlay', compact(['id']));
-    }
 }

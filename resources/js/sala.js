@@ -76,3 +76,14 @@ botonCopiarLink.addEventListener('click', (e) => {
 
 // Cargar codigo QR
 new QRCode(qrCompartir, botonCopiarLink.dataset.url);
+
+/**
+ * Control para unirse/abandonar la sala
+ */
+
+const formAcceso = document.getElementById('form-sala-acceso')
+const botonAcceso = document.getElementById('menu-sala-unirse');
+
+botonAcceso.addEventListener('click', (e) => {
+    formAcceso.submit();
+})

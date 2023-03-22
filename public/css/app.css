@@ -119,6 +119,13 @@ a {
 .standard-button-verde:hover a {
   color: black;
 }
+.boton-rojo {
+  background-color: #cc3e3e8a !important;
+  cursor: pointer;
+}
+.boton-verde {
+  background-color: #5acc3e8a !important;
+}
 @media screen and (orientation: portrait) {
   html {
     height: 100%;

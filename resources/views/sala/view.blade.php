@@ -3,6 +3,7 @@
 @push('head')
 <link rel="stylesheet" href="{{ asset('css/menuPrincipal.css') }}">
 <script type="text/javascript" src="{{asset('../resources/js/sala.js')}}" defer></script>
+<script type="text/javascript" src="{{asset('../resources/js/controlSala.js')}}" defer></script>
 <link rel="stylesheet" href="{{asset('css/sala.css')}}">
 
 {{-- Libreria QR --}}
@@ -12,6 +13,7 @@
 @section('content')
     {{-- Formularios escondidos para JS --}}
     <form action="{{ route('gincana.find', '') }}" method="get" id="form-gincanas-find"></form>
+    <form action="{{ route('sala.acceso', $sala) }}" method="post" id="form-sala-acceso">@csrf</form>
 
     {{-- Menu Principal --}}
     <div id="menu-principal" style="transform: translateX(0)">
@@ -28,6 +30,25 @@
         <div id="menu-principal-contenidos">
             <div id="menu-principal-header"><a href="{{ route('home') }}"><i class="fa-solid fa-chevron-left"></i></a> SALA</div>
             @auth
+                {{-- Si el usuario es el creador, podrá comenzar o terminar el juego --}}
+                @can('admin', $sala)
+                    @if ($sala->activa)
+                        <form action="{{ route('sala.estado', $sala) }}" method="post" style="width: 100%">
+                            @csrf
+                            <button id="menu-sala-comenzar" class="boton-rojo">Terminar</button>
+                        </form>
+                    @else
+                        <form action="{{ route('sala.estado', $sala) }}" method="post" style="width: 100%">
+                            @csrf
+                            <button id="menu-sala-comenzar" class="boton-verde">Comenzar</button>
+                        </form>
+                    @endif
+                @endcan
+                
+                @if ($sala->activa)
+                <a href="{{ route('sala.jugar', $sala) }}" style="width: 100%;"><button id="menu-sala-jugar" class="boton-verde">Unirse al juego</button></a>
+                @endif
+                
                 @can('jugador', $sala)
                     {{-- El usuario es jugador de la gincana --}}
                     <button id="menu-sala-unirse">Abandonar</button>
