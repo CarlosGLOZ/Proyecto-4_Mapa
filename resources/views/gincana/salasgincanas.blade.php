@@ -15,8 +15,18 @@
 @endsection
 
 @section('content')
+
+
+
+{{--        <div class="container">--}}
+{{--            <div id="resultado">--}}
+{{--            </div>--}}
+{{--            <p>{{$gincanas->nombre}}</p>--}}
+{{--            <p>{{$gincanas->autor->name}}</p>--}}
+{{--        </div>--}}
+{{--    @endforeach--}}
     <header class="header">
-        <h1> Barcelona Sud</h1>
+
     </header>
     <div class="main">
         <div>

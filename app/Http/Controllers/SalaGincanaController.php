@@ -83,4 +83,5 @@ class SalaGincanaController extends Controller
 
         return redirect()->route('sala.view', $sala->id);
     }
+
 }

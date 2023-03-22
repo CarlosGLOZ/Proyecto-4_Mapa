@@ -3,7 +3,7 @@
 @push('head')
     <link rel="stylesheet" href="{{ asset('css/menuPrincipal.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menuLocalizacion.css') }}">
-    
+
     {{-- Google Maps API --}}
     <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy0Ba3CPpNH48X3toUBGCrgQhaEvxaZks&libraries=places&v=weekly"

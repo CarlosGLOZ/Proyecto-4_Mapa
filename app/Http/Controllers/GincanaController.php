@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class GincanaController extends Controller
 {
-
-    /**
+   /**
      * Pagina de gincanas.
      */
     public function index()
@@ -34,6 +33,14 @@ class GincanaController extends Controller
         return $resu;
     }
 
+
+
+    public function findView($id)
+    {
+        $salas1 = Gincana::with('autor', 'salas', 'puntos')->find($id);
+
+        return view('gincana.salas', compact(['salas1']));
+    }
 
     public function find($id)
     {

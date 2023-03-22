@@ -37,6 +37,10 @@ Route::post('/loc/find', [LocalizacionController::class, 'find'])->name('loc.fin
 Route::get('/gincana/crear',[GincanaController::class,'crearView'])->name('gincana.crearView');
 Route::get('/gincana/lista', [GincanaController::class, 'index'])->name('gincana.lista');
 Route::post('/gincana/filtrar', [GincanaController::class, 'fitrar'])->name('gincana.filtrar');
+//Raul
+Route::get('/gincana/{id}', [GincanaController::class, 'findView'])->name('gincana.find');
+//Route::get('/prueba', [Controller::class, 'index']);
+
 Route::get('/gincana/{id}', [GincanaController::class, 'find'])->name('gincana.find');
 Route::get('/gincana/find/{id}', [GincanaController::class, 'find'])->name('gincana.find');
 
