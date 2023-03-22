@@ -10,94 +10,60 @@ class GincanaController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Pagina de gincanas.
      */
     public function index()
     {
+
         $gincana = Gincana::with('autor', 'puntos')->get();
            return view('gynkana', compact(['gincana']));
-    }
 
-    public function listar(Request $request) {
-        $filtro = $request->input('filtro');
-if (!$filtro==''){
-    $resu = Gincana::where('nombre', 'like', '%' . $filtro . '%')->get();
-    return response()->json($resu);
-}else{
-//    $resu = Gincana::join('usuario', 'usuario.id', '=', 'gincana.user_id')
-//        ->join('punto_gincana', 'punto_gincana.id', '=', 'gincana.punto_gincana_id')
-//        ->where('user_id', 2)
-//        ->select('usuario.nombre_user', 'punto_gincana.id')
-//        ->get();
-    $resu = Gincana::with('autor', 'puntos')->where(['user_id' => 2])->get();
-
-    return $resu;
-}
-
-
-    }
-
-    public function find(){
+        // $gincanas = Gincana::with('autor', 'puntos')->get();
+        return view('gincana.lista');
 
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devolver lista de gincanas según un filtro
      */
+    public function fitrar(Request $request) {
+        $filtro = $request->input('filtro');
+        $propias = $request->input('propias');
+
+        if ($propias == 'true') {
+            $resu = Gincana::with('autor', 'puntos')->where(['user_id' => auth()->user()->id])->get();
+        } else {
+            $resu = Gincana::with('autor', 'puntos')->where('nombre', 'like', $filtro.'%')->get();
+        }
+
+        return $resu;
+    }
+
+
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Gincana  $gincana
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Gincana $gincana)
+
+
+    public function findView($id)
     {
-        //
+        $salas1 = Gincana::with('autor', 'salas', 'puntos')->find($id);
+
+        return view('gincana.salas', compact(['salas1']));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Gincana  $gincana
-     * @return \Illuminate\Http\Response
+     * Esta función parece que no se usa para nada??
      */
-    public function edit(Gincana $gincana)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Gincana  $gincana
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Gincana $gincana)
-    {
-        //
-    }
-
     public function getGincana()
     {
         $restaurantes = Gincana::with(['gincana.autor', 'tags'])->get();

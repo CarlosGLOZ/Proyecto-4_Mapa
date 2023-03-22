@@ -16,6 +16,7 @@ class CreatePuntoGincanasTable extends Migration
         Schema::create('punto_gincanas', function (Blueprint $table) {
             $table->id();
             $table->integer('posicion', false, true);
+            $table->text('pista');
             $table->foreignId('gincana_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('localizacion_id')->constrained()->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('localizacion_maps_id')->nullable();

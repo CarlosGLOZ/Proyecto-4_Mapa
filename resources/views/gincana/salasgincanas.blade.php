@@ -26,10 +26,7 @@
 {{--        </div>--}}
 {{--    @endforeach--}}
     <header class="header">
-        @foreach($sala as $salas)
-            <p>{{$salas->nombre}}</p>
 
-        @endforeach
     </header>
     <div class="main">
         <div>
