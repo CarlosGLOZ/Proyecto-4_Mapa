@@ -21,7 +21,7 @@
         <div>
             <div class="persona">
                 <i class="fa-solid fa-user"></i>
-                <p>Persona</p>
+                <p id="jugador"></p>
             </div>
             <div class="logout">
                 <i class="fa-solid fa-arrow-rotate-left"></i>
@@ -30,7 +30,7 @@
 
         <div class="gincana">
             <p ></p>
-            <p>Gincana</p>
+            <p id="Nombre_Gincana"></p>
         </div>
 
     </div>
@@ -40,8 +40,7 @@
             <i class="fa-solid fa-caret-down"></i>
         </div>
 
-        <div class="desplegable" >
-         
+        <div class="desplegable" id="desplegable" >         
             <p id="pista-texto"></p>
         </div>
 

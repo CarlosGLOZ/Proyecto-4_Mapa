@@ -13,7 +13,8 @@ class GincanaController extends Controller
 
     public function find($id)
     {
-       return Gincana::with('autor', 'puntos', 'salas')->find($id);
+       return Gincana::with('autor', 'puntos.localizacion', 'salas')->find($id);
+       
     }
 
 }

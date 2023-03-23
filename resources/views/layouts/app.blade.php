@@ -8,8 +8,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" id="_token">
     <title>Mapa</title>
     <script src="https://kit.fontawesome.com/2b5286e1aa.js" crossorigin="anonymous"></script>
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">  
-    
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+
 
     @stack('css')
     @stack('js')
@@ -19,13 +21,13 @@
 
 <body>
     @if (Auth::check())
-        <script>
-            const auth = true;
-        </script>
+    <script>
+        const auth = true;
+    </script>
     @else
-        <script>
-            const auth = false;
-        </script>
+    <script>
+        const auth = false;
+    </script>
     @endif
 
     {{-- Navbar --}}

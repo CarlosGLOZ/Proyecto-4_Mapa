@@ -30,8 +30,11 @@ Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login')
 Route::get('/loc/localizaciones', [LocalizacionController::class, 'get'])->name('loc.localizaciones');
 
 //GincanaPlay
-Route::get('/gincana/GincanaPlay/{id}', [GincanaController::class, 'showGincanaPlay'])->name('gincana.GincanaPlay');
 Route::get('/gincana/find/{id}', [GincanaController::class, 'find'])->name('gincana.find');
+
+
+Route::get('/gincana/GincanaPlay/{id}', [GincanaController::class, 'showGincanaPlay'])->name('gincana.GincanaPlay');
+
 //Gincana
 Route::get('/gincana',[GincanaController::class,'crearView'])->name('gincana.crearView');
 
