@@ -24,7 +24,7 @@
             @endif
             <div class="inputs" id="titles"></div>
             <div class="point-info" id="point-box">
-                <span id="active-point" value="1">Point1</span>
+                <span id="active-point" value="undefined">No selec.</span>
                 <textarea id="pista" name="pista" placeholder="Pista"></textarea>
                 <div class="buttons-confPoint">
                     <i id="check2" name="check" class="fa-solid fa-circle-check"></i>
@@ -41,7 +41,9 @@
             </div>
         </div>
         <div id="mapa-main"></div>
+        <div id="alert" class="alert hide"></div>
     </div>
+
 
 
 @endsection

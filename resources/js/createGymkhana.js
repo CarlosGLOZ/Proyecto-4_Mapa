@@ -225,15 +225,30 @@ async function savePista(pistaId, pista){
     formada.append('id', pistaId)
     formada.append('pista', pista)
     formada.append('ginID', ginID)
-    await formada.append('latitud',activemark[0].getPosition().lat())
-    await formada.append('longitud',activemark[0].getPosition().lng())
-    await formada.append('longitud',activemark[0].getPosition().lng())
-    ajax.open('post', "./savePista");
-    ajax.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-    ajax.onload = function () {
-        console.log(ajax.responseText)
+    if (pistaId=="undefined"){
+        showAlert('Selecciona un Punto')
+        return false
+
+    }else if (pista=="" || pista==null || typeof pista=="undefined"){
+        showAlert('Introduce una pista para continuar')
+        return false
+    }else if (activemark && activemark.length > 0) {
+        await formada.append('latitud',activemark[0].getPosition().lat());
+        await formada.append('longitud',activemark[0].getPosition().lng());
+        ajax.open('post', "./savePista");
+        ajax.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+        ajax.onload = function () {
+            console.log(ajax.responseText)
+        }
+        ajax.send(formada);
+    } else {
+        showAlert('Marcador no seleccionado')
+        return false
     }
-    ajax.send(formada);
+
+
+
+
 }
 
 
@@ -368,4 +383,25 @@ function initMap() {
 
     }
 
+
+function showAlert(message) {
+    var alertDiv = document.getElementById("alert");
+    alertDiv.innerHTML = message;
+    alertDiv.classList.remove("hide");
+    setTimeout(function() {
+        alertDiv.style.opacity = 1;
+    }, 100);
+    setTimeout(function() {
+        alertDiv.style.opacity = 0;
+    }, 4500);
+    setTimeout(function() {
+        alertDiv.classList.add("hide");
+    }, 5000);
+}
+
+
+
 window.initMap = initMap;
+
+
+
