@@ -27,7 +27,11 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 //Gincana
 Route::get('/gincana',[GincanaController::class,'crearView'])->name('gincana.crearView');
 
-Route::get('/gynkana', [GincanaController::class, 'index']);
+Route::get('/createGincana', [GincanaController::class, 'index']);
+Route::get('/createGincana2/{gincana}', [GincanaController::class, 'index2']);
 Route::post('listar', [GincanaController::class, 'listar']);
-Route::post('/savePista', [GincanaController::class, 'savePista'])->name('gincana.savepista');
+Route::post('/createGincana2/savePista', [GincanaController::class, 'savePista'])->name('gincana.savepista');
 Route::post('/saveGin', [GincanaController::class, 'saveGin'])->name('gincana.saveGin');
+Route::post('/createGincana2/getLocaFromPoint', [GincanaController::class, 'getLocaFromPoint'])->name('gincana.getLocaFromPoint');
+Route::post('/createGincana2/PointComplete', [GincanaController::class, 'pointComplete'])->name('gincana.pointComplete');
+Route::post('/createGincana2/deletePista', [GincanaController::class, 'deletePista'])->name('gincana.deletePista');

@@ -1,5 +1,67 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap');
+
+.full-page{
+    margin: 2%;
+    width:97%;
+    height: 97vh;
+    background-color: #ffffff;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.principal-title{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+.full-page div input{
+    margin-top: 15%;
+    margin-bottom: 10%;
+    width: 70%;
+    padding: 3%;
+
+}
+.full-page div textarea{
+    width: 70%;
+}
+.full-page  div i{
+    margin-top: 5%;
+}
+
+.line-box{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.line-box p{
+    padding: 2%;
+    color: rgb(90, 96, 108);
+    text-align: center;
+}
+.tus-gincanas-box{
+    margin-top: 10%;
+    background-color: #1a202c;
+    padding: 5%;
+    color: white;
+    border-radius: 5%;
+}
+.line-box hr{
+    height: 0.5px;
+    border: none;
+    background-color: black;
+    width: 50%;
+    margin: 0 10px;
+}
+
+.full-page div[class="inputs"]{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
 .content {
     display: flex;
     flex-direction: column;
@@ -16,13 +78,13 @@
 
 }
 .point-info{
-    display: none;
+    display: flex;
     width: 100%;
     justify-content: space-evenly;
 
 }
 .points{
-    display: none;
+    display: flex;
 }
 .check1{
 

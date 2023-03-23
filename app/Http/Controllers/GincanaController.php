@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Localizacion;
 use App\Models\PuntoGincana;
 use App\Models\User;
 use App\Models\Gincana;
@@ -8,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use MongoDB\Driver\Session;
+use PHPUnit\Runner\Exception;
+use Psy\Util\Json;
+use function PHPUnit\Framework\throwException;
 
 class GincanaController extends Controller
 {
@@ -20,7 +24,14 @@ class GincanaController extends Controller
     {
        $gincana=Gincana::all();
 
-       return view('gynkana', compact(['gincana']));
+       return view('createGymkhana', compact(['gincana']));
+    }
+
+    public function index2($gincana){
+        $data = json_decode($gincana, true);
+        $id = $data['id'];
+        $gin= Gincana::with('puntos')->where('id',$id)->first();
+        return view('createGymkhana2',compact('gin'));
     }
 
     public function listar(Request $request) {
@@ -52,17 +63,95 @@ if (!$filtro==''){
 
     public function savePista(Request $request){
 
-        $request->validate([
-            'id' => 'required',
-            'content' => 'required',
-            'localizacion'=>'required',
+        try {
+            try {
+                $request->validate([
+                    'id' => 'required',
+                    'pista' => 'required',
+                    'latitud'=>'required',
+                    'longitud'=>'required',
 
-        ]);
+                ]);
+            }catch (Exception $e){
+                return $e->getMessage();
+            }
 
-        $point= new PuntoGincana;
-        $point->gincana_id=$request->id;
+        $pointExist=Localizacion::where('latitud',$request->latitud)->Where('longitud',$request->longitud)->first();
+            if ($pointExist){
+                $id=$pointExist->id;
+
+            }else{
+                $loc=new Localizacion;
+                $loc->nombre="PuntoGin";
+                $loc->latitud=$request->latitud;
+                $loc->longitud=$request->longitud;
+                $loc->punto_gincana=1;
+                $loc->user_id=1;
+                $loc->save();
+                $id=$loc->id;
+            }
+            $gincanaPoint=PuntoGincana::where('posicion',$request->id)->where('gincana_id',$request->ginID)->first();
+            if ($gincanaPoint){
+                $gincanaPoint->localizacion_id=$id;
+                $gincanaPoint->pista=$request->pista;
+                $gincanaPoint->save();
+            }else{
+                $point= new PuntoGincana;
+                $point->gincana_id=$request->ginID;
+                $point->localizacion_id=$id;
+                $point->posicion=$request->id;
+                $point->pista= $request->pista;
+                $point->save();
+            }
 
 
+            return "hola";
+        }catch (Exception $e){
+            return "hola2";
+
+        }
+
+
+
+    }
+
+    public function deletePista(Request $request){
+        $points=explode(',',$request->points);
+        PuntoGincana::where('posicion',$request->id)->where('gincana_id',$request->ginID)->delete();
+        $points=array_diff($points,(array)$request->id);
+        $points = array_values($points);
+        foreach ($points as $key => $point){
+            if (($point > $key+1) && $point !== $request->id){
+                echo "dentroooo";
+                $punto=PuntoGincana::where('posicion',$point)->where('gincana_id',$request->ginID)->first();
+                if ($punto){
+                    $punto->posicion=$key+1;
+                    $punto->save();
+                }
+
+            }
+        }
+
+    }
+
+    public function getLocaFromPoint(Request $request){
+        $point=PuntoGincana::with('localizacion')->where('posicion',$request->PointId)->where('gincana_id',$request->ginID)->first();
+        if ($point){
+            return $point;
+        }else{
+            return "false";
+        }
+
+    }
+
+    public function pointComplete(Request $request){
+        $finalPoint=PuntoGincana::where('gincana_id',$request->ginID)->where('posicion',$request->finalPoint)->first();
+
+        if ($finalPoint){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function crearView()
