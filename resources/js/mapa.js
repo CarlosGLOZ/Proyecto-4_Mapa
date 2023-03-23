@@ -11,6 +11,10 @@ const menuLocalizacion = document.getElementById('menu-localizacion');
 const menuBotonfav = document.getElementById('menu-localizacion-botonfav');
 const menuBotoncerrar = document.getElementById('menu-localizacion-botoncerrar');
 
+const menuLocalizacionCrear = document.getElementById('menu-localizacion-crear');
+const menuBotonfavCrear = document.getElementById('menu-localizacion-crear-botonfav');
+const menuBotoncerrarCrear = document.getElementById('menu-localizacion-crear-botoncerrar');
+
 const botonToggleFavoritos = document.getElementById('mapa-fav-toggle');
 
 // Activar boton de like
@@ -57,7 +61,7 @@ function abrirMenu(punto) {
 
         // Comprobar si el usuario le ha dado like a este punto
         let formData = new FormData(formGetLiked);
-        formData.append('localizacion_id', punto.nombre);
+        formData.append('localizacion_id', punto.id);
         formData.append('tipo_localizacion', 'BDD');
 
         let ajax = new XMLHttpRequest();
@@ -65,6 +69,9 @@ function abrirMenu(punto) {
 
         ajax.onload = (e) => {
             if (ajax.status === 200) {
+                console.log({
+                    'response': ajax.response
+                });
                 if (ajax.response == true) {
                     // El usuario le ha dado a like al punto de interés
                     menuBotonfav.dataset.action = 'removeLike';
@@ -110,11 +117,14 @@ function abrirMenu(punto) {
 
         ajax.onload = (e) => {
             if (ajax.status === 200) {
+                console.log({
+                    'response': ajax.response
+                });
                 if (ajax.response == true) {
                     // El usuario le ha dado a like al punto de interés
                     menuBotonfav.dataset.action = 'removeLike';
                     menuBotonfav.dataset.tipo = 'Google Maps';
-                    menuBotonfav.classList.replace('fa-soli', 'fa-regular');
+                    // menuBotonfav.classList.replace('fa-solid', 'fa-regular');
                     activarLike(menuBotonfav);
                 } else {
                     // El usuario no le ha dado a like al punto de interés
@@ -132,9 +142,48 @@ function abrirMenu(punto) {
     }
 }
 
+// Abrir menu con info del punto creado por el usuario
+function abrirMenuPuntoUsuario(punto) {
+    let menuImagenWrapper = document.getElementById('menu-localizacion-crear-imagen-wrapper');
+    let menuTitulo = document.getElementById('menu-localizacion-crear-titulo');
+    let menuDescripcion = document.getElementById('menu-localizacion-crear-descripcion');
+    let menuDireccion = document.getElementById('menu-localizacion-crear-direccion');
+    let latitud = document.getElementById('menu-localizacion-crear-input-latitud');
+    let longitud = document.getElementById('menu-localizacion-crear-input-longitud');
+
+    // Limpiar los datos de los inputs
+    menuTitulo.value = '';
+    menuDescripcion.value = '';
+
+    // Distinguir entre si es un punto del maps o de la BDD
+    menuImagenWrapper.style.display = "none";
+    menuDescripcion.style.display = 'block';
+    menuDireccion.innerText = punto.getPosition().lat().toFixed(5) + "º, " + punto.getPosition().lng().toFixed(5) + "º";
+    latitud.value = punto.getPosition().lat();
+    longitud.value = punto.getPosition().lng();
+
+    // El usuario no le ha dado a like al punto de interés
+    menuBotonfavCrear.dataset.action = 'addLike';
+    menuBotonfavCrear.dataset.tipo = 'NUEVO';
+    desactivarLike(menuBotonfavCrear);
+
+    // Mostrar menu
+    menuLocalizacionCrear.style.transform = "translateY(0)";
+}
+
+function cerrarMenus() {
+    menuLocalizacion.style.transform = "translate(-390px)";
+    menuLocalizacionCrear.style.transform = "translate(-390px)";
+}
+
 // Cerrar el menu
 menuBotoncerrar.addEventListener('click', (e) => {
-    menuLocalizacion.style.transform = "translate(-390px)";
+    cerrarMenus();
+});
+
+// Cerrar el menu de crear
+menuBotoncerrarCrear.addEventListener('click', (e) => {
+    cerrarMenus();
 });
 
 // Añadir/quitar favorito
@@ -157,6 +206,8 @@ menuBotonfav.addEventListener('click', (e) => {
             ajax.onload = (e) => {
                 if (ajax.status === 200) {
                     let response = JSON.parse(ajax.response);
+
+                    console.log(response);
 
                     if (response.status == 'OK') {
                         // Se ha puesto el like, cambiar el botón
@@ -188,6 +239,7 @@ menuBotonfav.addEventListener('click', (e) => {
                         // Se ha puesto el like, cambiar el botón
                         menuBotonfav.dataset.action = 'addLike';
                         desactivarLike(menuBotonfav);
+                        cerrarMenus();
                     }
                 }
             }
@@ -196,6 +248,59 @@ menuBotonfav.addEventListener('click', (e) => {
 
             menuBotonfav.dataset.action == 'addLike';
         }
+    }
+});
+
+// Añadir/quitar favorito de punto del usuario
+menuBotonfavCrear.addEventListener('click', (e) => {
+    // Si el usuario no está logueado, mandar a la pagina de login
+    if (!auth) {
+        window.location.href = "auth/LoginRegistrar";
+    } else {
+        let nombre = document.getElementById('menu-localizacion-crear-titulo');
+        let descripcion = document.getElementById('menu-localizacion-crear-descripcion');
+        let latitud = document.getElementById('menu-localizacion-crear-input-latitud');
+        let longitud = document.getElementById('menu-localizacion-crear-input-longitud');
+
+        // Validaciones
+        if (nombre.value.trim() == '') {
+            nombre.style.borderColor = "rgb(212, 59, 59)";
+            return;
+        } else {
+            nombre.style.borderColor = "black";
+        }
+
+        if (descripcion.value.trim() == '') {
+            descripcion.style.borderColor = "rgb(212, 59, 59)";
+            return;
+        } else {
+            descripcion.style.borderColor = "black";
+        }
+
+        // Mandar peticion de añadir favorito
+        let formData = new FormData(formStoreLike);
+        formData.append('tipo_localizacion', menuBotonfavCrear.dataset.tipo);
+        formData.append('nombre', nombre.value);
+        formData.append('descripcion', descripcion.value);
+        formData.append('latitud', latitud.value);
+        formData.append('longitud', longitud.value);
+
+        let ajax = new XMLHttpRequest();
+
+        ajax.open('POST', formStoreLike.action);
+
+        ajax.onload = (e) => {
+            if (ajax.status === 200) {
+                let response = JSON.parse(ajax.response);
+
+                if (response.status == 'OK') {
+                    // Se ha puesto el like, cerrar menu y añadir marcador
+                    cerrarMenus();
+                }
+            }
+        }
+
+        ajax.send(formData);
     }
 });
 
@@ -219,14 +324,22 @@ function initMap() {
         map.setCenter({ lat: position.coords.latitude, lng: position.coords.longitude });
     });
 
+    // Punto de interés creado por el usuario
+    let puntoUsuario = new google.maps.Marker({
+        map,
+        visible: false
+    });;
+
     // Añadir un event listener para cuando el usuario clica en un Punto de Interés
     map.addListener('click', (e) => {
         var lat = e.latLng.lat();
         var lng = e.latLng.lng();
         var poi = e.placeId;
 
-        if (poi) {
-            // El usuario ha clicado un punto de interés, mostrar menú con la info
+        // Asegurarse que los menús están cerrados
+        cerrarMenus();
+
+        if (poi) { // El usuario ha clicado un punto de interés, mostrar menú con la info
             var service = new google.maps.places.PlacesService(map);
 
             service.getDetails({
@@ -254,9 +367,12 @@ function initMap() {
                 }
             });
 
-        } else {
-            // El usuario ha clicado en un punto del mapa sin punto de interés
-            // console.log('Clicked on map at: ' + lat + ', ' + lng);
+        } else { // El usuario ha clicado en un punto del mapa sin punto de interés
+            // Recolocar el punto creado por el usuario
+            puntoUsuario.setPosition({ lat: lat, lng: lng });
+            puntoUsuario.setVisible(true);
+
+            abrirMenuPuntoUsuario(puntoUsuario);
         }
     });
 

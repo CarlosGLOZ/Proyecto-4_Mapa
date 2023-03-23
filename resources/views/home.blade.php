@@ -59,6 +59,28 @@
         </div>
     </div>
 
+    {{-- Menu con para guardar un punto --}}
+    <div id="menu-localizacion-crear">
+        <input type="hidden" name="latitud" id="menu-localizacion-crear-input-latitud">
+        <input type="hidden" name="longitud" id="menu-localizacion-crear-input-longitud">
+        <div id="menu-localizacion-crear-botoncerrar-wrapper">
+            <i class="fa-solid fa-xmark" id="menu-localizacion-crear-botoncerrar"></i>
+        </div>
+        <div id="menu-localizacion-crear-imagen-wrapper">
+            <div id="menu-localizacion-crear-imagen"></div>
+        </div>
+        <div id="menu-localizacion-crear-datos">
+            <input type="text" name="nombre" id="menu-localizacion-crear-titulo" placeholder="Nombre" required>
+            <div class="contenedor-datos-intermedio">
+                <p id="menu-localizacion-crear-autor">Tú</p>
+                <i class="fa-regular fa-bookmark" id="menu-localizacion-crear-botonfav"></i>
+            </div>
+            <input type="text" name="descripcion" id="menu-localizacion-crear-descripcion" placeholder="Descripción" required>
+            <p id="menu-localizacion-crear-direccion"></p>
+            <div id="menu-localizacion-crear-tags"></div>
+        </div>
+    </div>
+
     {{-- Menu Principal--}}
     <div id="menu-principal">
         <div id="menu-principal-navbar">
