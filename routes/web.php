@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\LikeLocalizacionController;
 use App\Http\Controllers\LocalizacionController;
 use App\Http\Controllers\GincanaController;
+use App\Http\Controllers\SalaGincanaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,16 +19,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', [Controller::class, 'index'])->name('home');
 
 // Auth
 Route::get('/auth/LoginRegistrar', [AuthController::class, 'showLoginRegistrar'])->name('auth.LoginRegistrar');
 Route::post('/auth/registrar', [AuthController::class, 'registrar'])->name('auth.registrar');
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 // Localizaciones
 Route::get('/loc/localizaciones', [LocalizacionController::class, 'get'])->name('loc.localizaciones');
+Route::get('/loc/favoritas', [LocalizacionController::class, 'favoritas'])->name('loc.favoritas');
+Route::get('/loc/asyncFavoritas', [LocalizacionController::class, 'asyncFavoritas'])->name('loc.asyncFavoritas');
+Route::post('/loc/find', [LocalizacionController::class, 'find'])->name('loc.find');
+
+//Gincana
+Route::get('/gincana/crear',[GincanaController::class,'crearView'])->name('gincana.crearView');
+Route::get('/gincana/lista', [GincanaController::class, 'index'])->name('gincana.lista');
+Route::post('/gincana/filtrar', [GincanaController::class, 'fitrar'])->name('gincana.filtrar');
+Route::get('/gincana/{id}', [GincanaController::class, 'find'])->name('gincana.find');
 
 //GincanaPlay
 Route::get('/gincana/find/{id}', [GincanaController::class, 'find'])->name('gincana.find');
