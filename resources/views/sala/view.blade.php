@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
 @push('head')
-<link rel="stylesheet" href="{{ asset('css/menuPrincipal.css') }}">
-<script type="text/javascript" src="{{asset('../resources/js/sala.js')}}" defer></script>
-<script type="text/javascript" src="{{asset('../resources/js/controlSala.js')}}" defer></script>
-<link rel="stylesheet" href="{{asset('css/sala.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/menuPrincipal.css') }}">
+    <script type="text/javascript" src="{{asset('../resources/js/sala.js')}}" defer></script>
+    <link rel="stylesheet" href="{{asset('css/sala.css')}}">
+    <script type="text/javascript" src="{{ asset('../resources/js/menuPrincipal.js') }}" defer></script>
 
-{{-- Libreria QR --}}
-<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+    {{-- Libreria QR --}}
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 @endpush
 
 @section('content')
@@ -66,17 +67,23 @@
                     <div class="menu-detalles-sala-contenidos" data-menuID="detalles">
                         <div class="boton-menu-principal localizacion-guardada">
                             <i class="fa-solid fa-map-location-dot"></i>
-                            <div class="menu-info-sala-item-usuario-nombre">
-                                {{ $sala->gincana->nombre }}
-                                <div class="loc-coordenadas">
-                                    {{ $sala->gincana->autor->name }}
+                            <a href="{{ route('gincana.view', $sala->gincana->id) }}">
+                                <div class="menu-info-sala-item-usuario-nombre">
+                                    Gymkhana
+                                    <div class="loc-coordenadas">
+                                        {{ $sala->gincana->nombre }}
+                                        {{-- {{ $sala->gincana->autor->name }} --}}
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         <div class="boton-menu-principal localizacion-guardada">
                             <i class="fa-solid fa-user"></i>
                             <div class="menu-info-sala-item-usuario-nombre">
-                                {{ $sala->creador->name }}
+                                Creador
+                                <div class="menu-info-sala-item-usuario-nombre loc-coordenadas">
+                                    {{ $sala->creador->name }}
+                                </div>
                             </div>
                         </div>
                     </div>

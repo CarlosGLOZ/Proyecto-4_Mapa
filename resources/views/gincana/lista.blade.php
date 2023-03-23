@@ -3,7 +3,7 @@
 @push('head')
     <link rel="stylesheet" href="{{asset('css/gincana.css')}}">
     <link rel="stylesheet" href="{{ asset('css/menuPrincipal.css') }}">
-    <script type="text/javascript" src="{{asset('../resources/js/gincana.js')}}" defer></script>
+    <script type="text/javascript" src="{{asset('../resources/js/gincanas.js')}}" defer></script>
 @endpush
 
 @section('content')

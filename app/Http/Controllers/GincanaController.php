@@ -37,9 +37,9 @@ class GincanaController extends Controller
 
     public function view($id)
     {
-        $salas1 = Gincana::with('autor', 'salas', 'puntos')->find($id);
+        $gincana = Gincana::with('autor', 'salas.creador', 'puntos')->find($id);
 
-        return view('gincana.view', compact(['salas1']));
+        return view('gincana.view', compact(['gincana']));
     }
 
     public function find($id)
