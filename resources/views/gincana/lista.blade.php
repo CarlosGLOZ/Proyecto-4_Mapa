@@ -3,6 +3,7 @@
 @push('head')
     <link rel="stylesheet" href="{{asset('css/gincana.css')}}">
     <link rel="stylesheet" href="{{ asset('css/menuPrincipal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sala.css') }}">
     <script type="text/javascript" src="{{asset('../resources/js/gincanas.js')}}" defer></script>
 @endpush
 
@@ -24,6 +25,7 @@
         </div>
         <div id="menu-principal-contenidos">
             <div id="menu-principal-header">GYMKHANAS</div>
+            <a href="{{ route('gincana.crear') }}" style="width: 100%;"><button id="menu-sala-jugar" class="boton-verde">Crear Gymkhana</button></a>
             <button class="boton-menu-principal" id="menu-principal-boton-atras"><i class="fa-solid fa-chevron-left"></i><a href="{{ route('home') }}">Atrás</a></button>
             <div>
                 <form action="{{ route('gincana.filtrar') }}" method="POST" id="menu-gincanas-filtros">
