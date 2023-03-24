@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PuntoGincana extends Model
 {
     use HasFactory;
+    protected $fillable=['id','pista','posicion','gincana_id','localizacion_id','localizacion_maps_id'];
 
     /**
      * La gincana a la que pertenece un punto

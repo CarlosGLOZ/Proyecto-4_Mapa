@@ -9,6 +9,8 @@ class Gincana extends Model
 {
     use HasFactory;
 
+    protected $fillable=['id','nombre','user_id','created_at','updated_at'];
+
     /**
      * El autor de la gincana
      */

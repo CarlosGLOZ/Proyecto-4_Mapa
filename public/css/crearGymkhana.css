@@ -1,3 +1,67 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap');
+
+.full-page{
+    margin: 2%;
+    width:97%;
+    height: 97vh;
+    background-color: #ffffff;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.principal-title{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+.full-page div input{
+    margin-top: 15%;
+    margin-bottom: 10%;
+    width: 70%;
+    padding: 3%;
+
+}
+.full-page div textarea{
+    width: 70%;
+}
+.full-page  div i{
+    margin-top: 5%;
+}
+
+.line-box{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.line-box p{
+    padding: 2%;
+    color: rgb(90, 96, 108);
+    text-align: center;
+}
+.tus-gincanas-box{
+    margin-top: 10%;
+    background-color: #1a202c;
+    padding: 5%;
+    color: white;
+    border-radius: 5%;
+}
+.line-box hr{
+    height: 0.5px;
+    border: none;
+    background-color: black;
+    width: 50%;
+    margin: 0 10px;
+}
+
+.full-page div[class="inputs"]{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
 .content {
     display: flex;
     flex-direction: column;
@@ -5,7 +69,49 @@
     max-width: 100vh;
     align-items: center;
 }
+.content .header .tittle{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 2%;
+    font-family: 'Abhaya Libre', serif;
 
+}
+.point-info{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+
+}
+.points{
+    display: flex;
+}
+.check1{
+
+}
+.inputs{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5% ;
+}
+.point-info i:first-child{
+    color: green;
+}
+.point-info i:nth-child(2){
+    color: red;
+}
+.point-span{
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 2%;
+    margin: 2%;
+}
+.add-point-span{
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 2%;
+    background-color: green;
+}
 .header {
     height: 25vh;
     background-color: #F6F6F6;
@@ -34,4 +140,26 @@
     left: 0;
     top: 25vh;
     z-index: 2;
+}
+
+.alert {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    z-index: 10;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 50px;
+    border-radius: 25px;
+    background-color: red;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hide {
+    visibility: hidden;
 }
