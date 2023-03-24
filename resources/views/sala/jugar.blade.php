@@ -3,7 +3,7 @@
 @push('css')
 <link rel="stylesheet" href="{{asset('css/GincanaPlay.css')}}">
 <script src="{{ asset('../resources/js/GincanaPlay.js') }}" defer></script>
-<script src="{{ asset('../resources/js/sala.js') }}" defer></script>
+{{-- <script src="{{ asset('../resources/js/sala.js') }}" defer></script> --}}
 
 {{-- Google Maps API --}}
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy0Ba3CPpNH48X3toUBGCrgQhaEvxaZks&callback=initMap&v=weekly" defer></script>
@@ -22,7 +22,7 @@
         <div>
             <div class="persona">
                 <i class="fa-solid fa-user"></i>
-                <p>Persona</p>
+                <p id="jugador"></p>
             </div>
             <div class="logout">
                 <i class="fa-solid fa-arrow-rotate-left"></i>
@@ -31,7 +31,7 @@
 
         <div class="gincana">
             <p ></p>
-            <p>Gincana</p>
+            <p id="Nombre_Gincana"></p>
         </div>
 
     </div>
@@ -41,8 +41,7 @@
             <i class="fa-solid fa-caret-down"></i>
         </div>
 
-        <div class="desplegable" >
-         
+        <div class="desplegable" id="desplegable" >         
             <p id="pista-texto"></p>
         </div>
 

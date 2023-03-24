@@ -33,17 +33,21 @@ class GincanaController extends Controller
         return $resu;
     }
 
-
-
+    /**
+     * Devolver pagina de gincana con los datos de la gincana
+     */
     public function view($id)
     {
-        $gincana = Gincana::with('autor', 'salas.creador', 'puntos')->find($id);
+        $gincana = Gincana::with('autor', 'salas.creador', 'puntos.localizacion')->find($id);
 
         return view('gincana.view', compact(['gincana']));
     }
 
+    /**
+     * Devolver los datos de una gincana
+     */
     public function find($id)
     {
-       return Gincana::with('autor', 'puntos', 'salas')->find($id);
+       return Gincana::with('autor', 'puntos.localizacion', 'salas')->find($id);
     }
 }
