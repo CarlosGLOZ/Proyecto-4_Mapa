@@ -26,7 +26,41 @@
     }
 }
 
+#menu-localizacion-crear {
+    width: 390px;
+    // height: 60%;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 4;
+    
+    display: flex;
+    flex-direction: column;
+
+    transition-duration: .3s;
+
+    transform: translateX(-390px);
+
+    background-color: white;
+    padding: 40px;
+
+    font-family: 'Inter', sans-serif;
+
+    // gap: 20px;
+    justify-content: space-between;
+
+    div {
+        width: 100%;
+    }
+}
+
 #menu-localizacion-botoncerrar-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+#menu-localizacion-crear-botoncerrar-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: right;
@@ -37,7 +71,18 @@
     font-size: 30px;
 }
 
+#menu-localizacion-crear-botoncerrar {
+    cursor: pointer;
+    font-size: 30px;
+}
+
 #menu-localizacion-datos {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+
+#menu-localizacion-crear-datos {
     display: flex;
     gap: 30px;
     flex-direction: column;
@@ -47,11 +92,31 @@
     font-size: 30px;
 }
 
+#menu-localizacion-crear-titulo {
+    font-size: 30px;
+    border: none;
+    outline: none;
+    border-bottom: solid 1px black;
+    margin-top: 20px;
+    padding: 7px 5px;
+}
+
 #menu-localizacion-imagen-wrapper {
     margin: 10px 0px 10px 0px;
 }
 
+#menu-localizacion-crear-imagen-wrapper {
+    margin: 10px 0px 10px 0px;
+}
+
 #menu-localizacion-imagen {
+    width: 100%;
+    height: 210px;
+    background-position: center;
+    background-size: cover;
+}
+
+#menu-localizacion-crear-imagen {
     width: 100%;
     height: 210px;
     background-position: center;
@@ -63,7 +128,18 @@
     color: #919191;
 }
 
+#menu-localizacion-crear-autor {
+    font-size: 20px;
+    color: #919191;
+}
+
 #menu-localizacion-tags {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+#menu-localizacion-crear-tags {
     display: flex;
     flex-direction: row;
     gap: 15px;
@@ -81,6 +157,22 @@
     // margin-top: 20px;
     cursor: pointer;
     transition: color 0.1s;
+}
+
+#menu-localizacion-crear-botonfav {
+    font-size: 31px;
+    // margin-top: 20px;
+    cursor: pointer;
+    transition: color 0.1s;
+}
+
+#menu-localizacion-crear-descripcion {
+    font-size: 30px;
+    border: none;
+    outline: none;
+    border-bottom: solid 1px black;
+    margin-top: 20px;
+    padding: 7px 5px;
 }
 
 .contenedor-datos-intermedio {

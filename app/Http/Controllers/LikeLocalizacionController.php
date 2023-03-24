@@ -55,12 +55,10 @@ class LikeLocalizacionController extends Controller
         $tipo = $request->input('tipo_localizacion'); // El tipo de localizacion que es (BDD o Google Maps)
 
         if ($tipo == 'BDD') {
-            $like = LikeLocalizacion::where([
-                'user_id' => auth()->user()->id,
-                'localizacion_id' => $locId
-            ]);
+            // Eliminar la localizacion y, por cascade, su like
+            $localizacion = Localizacion::find($locId);
 
-            $result = $like->delete();
+            $result = $localizacion->delete();
 
         } elseif ($tipo == 'Google Maps') {
 
@@ -84,21 +82,33 @@ class LikeLocalizacionController extends Controller
      */
     public function store(Request $request)
     {
-        $locId = $request->input('id_localizacion'); // El ID de la localizacion
         $tipo = $request->input('tipo_localizacion'); // El tipo de localizacion que es (BDD o Google Maps)
-
+        
         if ($tipo == 'BDD') {
+            $locId = $request->input('id_localizacion'); // El ID de la localizacion
             $localizacion = Localizacion::find($locId);
-
+            
             $result = $localizacion->likes()->create([
                 'user_id' => auth()->user()->id,
             ]);
-
+            
         } elseif ($tipo == 'Google Maps') {
+            $locId = $request->input('id_localizacion'); // El ID de la localizacion
 
             $result = LikeLocalizacion::create([
                 'user_id' => auth()->user()->id,
                 'localizacion_maps_id' => $locId
+            ]);
+        } elseif ($tipo == 'NUEVO') {
+            $result = Localizacion::create([
+                'nombre' => $request->input('nombre'),
+                'descripcion' => $request->input('descripcion'),
+                'latitud' => $request->input('latitud'),
+                'longitud' => $request->input('longitud'),
+                'user_id' => auth()->user()->id,
+                'punto_gincana' => 0
+            ])->likes()->create([
+                'user_id' => auth()->user()->id,
             ]);
         }
 

@@ -2,22 +2,23 @@
 
 @push('head')
     <link rel="stylesheet" href="{{ asset('css/menuPrincipal.css') }}">
-    <script type="text/javascript" src="{{asset('../resources/js/sala.js')}}" defer></script>
-    <link rel="stylesheet" href="{{asset('css/sala.css')}}">
-    <script type="text/javascript" src="{{ asset('../resources/js/menuPrincipal.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ asset('css/sala.css') }}">
 
+    <script type="text/javascript" src="{{ asset('../resources/js/menuPrincipal.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('../resources/js/gincana.js') }}" defer></script>
 
     {{-- Libreria QR --}}
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 @endpush
 
 @section('content')
-    {{-- Formularios escondidos para JS --}}
-    <form action="{{ route('gincana.view', '') }}" method="get" id="form-gincanas-find"></form>
-    <form action="{{ route('sala.acceso', $sala) }}" method="post" id="form-sala-acceso">@csrf</form>
 
-    {{-- Menu Principal --}}
+{{-- Formularios escondidos para JS --}}
+
+{{-- Menu Principal --}}
     <div id="menu-principal" style="transform: translateX(0)">
+
+        {{-- Navbar --}}
         <div id="menu-principal-navbar">
             <i class="fa-solid fa-user"></i>
             @auth
@@ -28,37 +29,59 @@
                 <a href="{{ route('auth.LoginRegistrar') }}" style="color: black;"><i class="fa-solid fa-right-to-bracket"></i></a>
             @endauth
         </div>
+
+        {{-- Contenidos --}}
         <div id="menu-principal-contenidos">
-            <div id="menu-principal-header"><a href="{{ route('home') }}"><i class="fa-solid fa-chevron-left"></i></a> SALA</div>
+            <div id="menu-principal-header"><a href="{{ route('home') }}"><i class="fa-solid fa-chevron-left"></i></a> GYMKHANA</div>
+            
+            {{-- Crear sala --}}
+            <div id="menu-principal-subheader">
+                <p id="menu-principal-subheader-titulo">{{ $gincana->nombre }}</p>
+                <p id="menu-principal-subheader-subtitulo">{{ $gincana->descripcion }}</p>
+            </div>
+
             @auth
-                {{-- Si el usuario es el creador, podrá comenzar o terminar el juego --}}
-                @can('admin', $sala)
-                    @if ($sala->activa)
-                        <form action="{{ route('sala.estado', $sala) }}" method="post" style="width: 100%">
-                            @csrf
-                            <button id="menu-sala-comenzar" class="boton-rojo">Terminar</button>
-                        </form>
-                    @else
-                        <form action="{{ route('sala.estado', $sala) }}" method="post" style="width: 100%">
-                            @csrf
-                            <button id="menu-sala-comenzar" class="boton-verde">Comenzar</button>
-                        </form>
-                    @endif
-                @endcan
-
-                @if ($sala->activa)
-                <a href="{{ route('sala.jugar', $sala) }}" style="width: 100%;"><button id="menu-sala-jugar" class="boton-verde">Unirse al juego</button></a>
-                @endif
-
-                @can('jugador', $sala)
-                    {{-- El usuario es jugador de la gincana --}}
-                    <button id="menu-sala-unirse">Abandonar</button>
-                @else
-                    {{-- El usuario no es jugador de la gincana --}}
-                    <button id="menu-sala-unirse">Unirse</button>
-                @endcan
+                <a href="{{ route('gincana.find', $gincana->id) }}" style="width: 100%;"><button id="menu-sala-jugar" class="boton-verde">Crear sala</button></a>
             @endauth
+            
             <div id="menu-detalles-sala-wrapper">
+                @auth
+    
+                    {{-- Si el usuario es el autor, podrá comenzar o terminar el juego --}}
+                    @can('admin', $gincana)
+                        <div class="menu-detalles-sala-item">
+                            <div class="menu-detalles-sala-header" data-menuID="acciones">
+                                <i class="fa-solid fa-chevron-down menu-detalles-header-icon"></i>
+                                <p>Acciones</p>
+                            </div>
+                            <div class="menu-detalles-sala-contenidos" data-menuID="acciones">
+                                <div class="boton-menu-principal localizacion-guardada">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <a href="{{ route('gincana.find', $gincana->id) }}">
+                                        <div class="menu-info-sala-item-usuario-nombre">
+                                            Editar
+                                            <div class="loc-coordenadas">
+                                                {{ $gincana->nombre }}
+                                                {{-- {{ $sala->gincana->autor->name }} --}}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="boton-menu-principal localizacion-guardada">
+                                    <i class="fa-solid fa-ban"></i>
+                                    <a href="{{ route('gincana.find', $gincana->id) }}">
+                                        <div class="menu-info-sala-item-usuario-nombre">
+                                            Eliminar
+                                            <div class="menu-info-sala-item-usuario-nombre loc-coordenadas">
+                                                {{ $gincana->nombre }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endcan
+                @endauth
                 <div class="menu-detalles-sala-item">
                     <div class="menu-detalles-sala-header" data-menuID="detalles">
                         <i class="fa-solid fa-chevron-down menu-detalles-header-icon"></i>
@@ -67,11 +90,11 @@
                     <div class="menu-detalles-sala-contenidos" data-menuID="detalles">
                         <div class="boton-menu-principal localizacion-guardada">
                             <i class="fa-solid fa-map-location-dot"></i>
-                            <a href="{{ route('gincana.view', $sala->gincana->id) }}">
+                            <a href="{{ route('gincana.view', $gincana->id) }}">
                                 <div class="menu-info-sala-item-usuario-nombre">
-                                    Gymkhana
+                                    Nombre
                                     <div class="loc-coordenadas">
-                                        {{ $sala->gincana->nombre }}
+                                        {{ $gincana->nombre }}
                                         {{-- {{ $sala->gincana->autor->name }} --}}
                                     </div>
                                 </div>
@@ -82,7 +105,7 @@
                             <div class="menu-info-sala-item-usuario-nombre">
                                 Creador
                                 <div class="menu-info-sala-item-usuario-nombre loc-coordenadas">
-                                    {{ $sala->creador->name }}
+                                    {{ $gincana->autor->name }}
                                 </div>
                             </div>
                         </div>
@@ -118,16 +141,21 @@
                 <div class="menu-detalles-sala-item">
                     <div class="menu-detalles-sala-header" data-menuID="jugadores">
                         <i class="fa-solid fa-chevron-down menu-detalles-header-icon"></i>
-                        <p>Jugadores</p>
+                        <p>Salas</p>
                     </div>
                     <div class="menu-detalles-sala-contenidos" data-menuID="jugadores">
-                        @foreach ($sala->jugadores as $jugador)
-                            <div class="boton-menu-principal localizacion-guardada">
-                                <i class="fa-solid fa-user"></i>
-                                <div class="menu-info-sala-item-usuario-nombre">
-                                    {{ $jugador->name }}
+                        @foreach ($gincana->salas as $sala)
+                            <a href="{{ route('sala.view', $sala->id) }}">
+                                <div class="boton-menu-principal localizacion-guardada">
+                                    <i class="fa-solid fa-user"></i>
+                                    <div class="menu-info-sala-item-usuario-nombre">
+                                        Sala {{ $sala->id}}
+                                        <p class="loc-coordenadas">
+                                            {{ $sala->creador->name }}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>
@@ -135,4 +163,3 @@
         </div>
     </div>
 @endsection
-

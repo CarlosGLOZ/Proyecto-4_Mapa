@@ -3,12 +3,12 @@
 @push('head')
     <link rel="stylesheet" href="{{asset('css/gincana.css')}}">
     <link rel="stylesheet" href="{{ asset('css/menuPrincipal.css') }}">
-    <script type="text/javascript" src="{{asset('../resources/js/gincana.js')}}" defer></script>
+    <script type="text/javascript" src="{{asset('../resources/js/gincanas.js')}}" defer></script>
 @endpush
 
 @section('content')
     {{-- Formularios escondidos para JS --}}
-    <form action="{{ route('gincana.find', '') }}" method="get" id="form-gincanas-find"></form>
+    <form action="{{ route('gincana.view', '') }}" method="get" id="form-gincanas-find"></form>
 
     {{-- Menu Principal --}}
     <div id="menu-principal" style="transform: translateX(0)">

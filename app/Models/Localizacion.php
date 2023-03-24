@@ -9,6 +9,15 @@ class Localizacion extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'latitud',
+        'longitud',
+        'user_id',
+        'punto_gincana'
+    ];
+
     /**
      * Las gincanas en las que esta localizacion se utiliza
      */

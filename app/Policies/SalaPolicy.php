@@ -12,7 +12,7 @@ class SalaPolicy
     use HandlesAuthorization;
 
     /**
-     * Si el usuario es jugador de una gincana
+     * Si el usuario es jugador de una sala
      */
     public function jugador(User $user, SalaGincana $sala)
     {
