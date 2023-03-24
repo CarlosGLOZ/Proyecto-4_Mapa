@@ -95,7 +95,7 @@
         </div>
         <div id="menu-principal-contenidos">
             <div id="menu-principal-header">GEOEXPLORER</div>
-            <div id="menu-principal-botones">
+            <div class="menu-principal-botones">
                 <button class="boton-menu-principal"><i class="fa-solid fa-list-ul"></i><a href="{{ route('gincana.lista') }}">Gymkhanas</a></button>
                 @auth
                     <button class="boton-menu-principal"><i class="fa-solid fa-bookmark"></i><a href="{{ route('loc.favoritas') }}">Guardadas</a></button>

@@ -40,7 +40,7 @@ Route::post('/gincana/filtrar', [GincanaController::class, 'fitrar'])->name('gin
 Route::get('/gincana/{id}', [GincanaController::class, 'view'])->name('gincana.view');
 Route::get('/gincana/find/{id}', [GincanaController::class, 'find'])->name('gincana.find');
 
-Route::get('/createGincana', [GincanaController::class, 'index']);
+Route::get('/createGincana', [GincanaController::class, 'index'])->name('gincana.crear');;
 Route::get('/createGincana2/{id}', [GincanaController::class, 'index2'])->name('gincana.editar');
 Route::post('listar', [GincanaController::class, 'listar']);
 Route::post('/createGincana2/savePista', [GincanaController::class, 'savePista'])->name('gincana.savepista');
