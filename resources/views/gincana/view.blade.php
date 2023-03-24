@@ -16,6 +16,9 @@
 {{-- Formularios escondidos para JS --}}
 
 {{-- Menu Principal --}}
+    @error('gincana_id')
+        {{ $message }}
+    @enderror
     <div id="menu-principal" style="transform: translateX(0)">
 
         {{-- Navbar --}}
@@ -41,7 +44,11 @@
             </div>
 
             @auth
-                <a href="{{ route('gincana.find', $gincana->id) }}" style="width: 100%;"><button id="menu-sala-jugar" class="boton-verde">Crear sala</button></a>
+                <form action="{{ route('sala.store') }}" method="post" style="width: 100%;">
+                    @csrf 
+                    <input type="hidden" name="gincana_id" value="{{ $gincana->id }}">
+                    <button id="menu-sala-jugar" class="boton-verde">Crear sala</button>
+                </form>
             @endauth
             
             <div id="menu-detalles-sala-wrapper">
@@ -57,7 +64,7 @@
                             <div class="menu-detalles-sala-contenidos" data-menuID="acciones">
                                 <div class="boton-menu-principal localizacion-guardada">
                                     <i class="fa-solid fa-pen-to-square"></i>
-                                    <a href="{{ route('gincana.find', $gincana->id) }}">
+                                    <a href="{{ route('gincana.editar', $gincana->id) }}">
                                         <div class="menu-info-sala-item-usuario-nombre">
                                             Editar
                                             <div class="loc-coordenadas">

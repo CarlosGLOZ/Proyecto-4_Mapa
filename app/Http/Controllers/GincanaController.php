@@ -22,7 +22,7 @@ class GincanaController extends Controller
     {
        $gincana=Gincana::all();
 
-       return view('gynkana', compact(['gincana']));
+       return view('gincana.lista', compact(['gincana']));
     }
 
     public function listar(Request $request) {
@@ -44,10 +44,8 @@ class GincanaController extends Controller
        return view('createGymkhana', compact(['gincana']));
     }
 
-    public function index2($gincana){
-        $data = json_decode($gincana, true);
-        $id = $data['id'];
-        $gin= Gincana::with('puntos')->where('id',$id)->first();
+    public function index2($id){
+        $gin = Gincana::with('autor','puntos')->find($id);
         return view('createGymkhana2',compact('gin'));
     }
 
@@ -98,6 +96,7 @@ class GincanaController extends Controller
         ]);
         $gincana= new Gincana;
         $gincana->nombre= $request->nombre;
+        $gincana->descripcion= $request->descripcion;
         $gincana->user_id= 1;
         $gincana->save();
         return $gincana;
@@ -128,7 +127,7 @@ class GincanaController extends Controller
                 $loc->latitud=$request->latitud;
                 $loc->longitud=$request->longitud;
                 $loc->punto_gincana=1;
-                $loc->user_id=1;
+                $loc->user_id=auth()->user()->id;
                 $loc->save();
                 $id=$loc->id;
             }

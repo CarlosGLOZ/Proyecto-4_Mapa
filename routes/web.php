@@ -41,7 +41,7 @@ Route::get('/gincana/{id}', [GincanaController::class, 'view'])->name('gincana.v
 Route::get('/gincana/find/{id}', [GincanaController::class, 'find'])->name('gincana.find');
 
 Route::get('/createGincana', [GincanaController::class, 'index']);
-Route::get('/createGincana2/{gincana}', [GincanaController::class, 'index2']);
+Route::get('/createGincana2/{id}', [GincanaController::class, 'index2'])->name('gincana.editar');
 Route::post('listar', [GincanaController::class, 'listar']);
 Route::post('/createGincana2/savePista', [GincanaController::class, 'savePista'])->name('gincana.savepista');
 Route::post('/saveGin', [GincanaController::class, 'saveGin'])->name('gincana.saveGin');
@@ -54,6 +54,7 @@ Route::get('/sala/{id}', [SalaGincanaController::class, 'view'])->name('sala.vie
 Route::post('/sala/estado/{sala}', [SalaGincanaController::class, 'estado'])->name('sala.estado');
 Route::get('/sala/jugar/{id}', [SalaGincanaController::class, 'jugar'])->name('sala.jugar'); // ANTERIORMENTE GincanaPlay
 Route::post('/sala/acceso/{sala}', [SalaGincanaController::class, 'acceso'])->name('sala.acceso');
+Route::post('/sala/store', [SalaGincanaController::class, 'store'])->name('sala.store');
 
 // Likes
 Route::post('/loc/liked', [LikeLocalizacionController::class, 'isLiked'])->name('loc.liked');

@@ -84,4 +84,26 @@ class SalaGincanaController extends Controller
         return redirect()->route('sala.view', $sala->id);
     }
 
+    /**
+     * Crear una sala
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'gincana_id' => 'required|numeric|exists:gincanas,id'
+        ]);
+
+        $id = SalaGincana::insertGetId([
+            'user_id' => auth()->user()->id,
+            'gincana_id' => $request->input('gincana_id'),
+            'activa' => 0,
+            'password' => '',
+        ]);
+
+        if ($id) {
+            return redirect()->route('sala.view', $id);
+        } else {
+            return back();
+        }
+    }
 }
