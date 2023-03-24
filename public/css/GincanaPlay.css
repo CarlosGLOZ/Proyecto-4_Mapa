@@ -19,7 +19,7 @@
 .info {
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 13vh;
     width: 100%;
     padding: 15px;
     border-radius: 5px;
@@ -118,12 +118,15 @@
 }
 
 #pista:hover .desplegable {
-    display: block;
     word-wrap: break-word;
     /* Para navegadores antiguos */
     overflow-wrap: break-word;
     /* Para navegadores modernos */
     text-align: justify;
+}
+
+#pista:not(:hover) .desplegable {
+    display: none;
 }
 
 @keyframes slidein1 {
@@ -136,26 +139,6 @@
         padding: 5px;
     }
 }
-
-
-/*Animación Pista*/
-
-
-/* 
-.pista-animation {
-    animation-delay: 3s;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-    animation-name: slidein2;
-}
-
-@keyframes slidein2 {
-    from {}
-    to {
-        margin-top: -160%;
-        margin-left: 0%;
-    }
-} */
 
 #map-buttons {
     z-index: 3;
