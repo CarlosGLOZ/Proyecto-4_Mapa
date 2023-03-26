@@ -1,5 +1,27 @@
 window.onload = function (e){
 
+    const button = document.getElementById('toggle-button');
+    const close = document.getElementById('close')
+    const box = document.getElementById('point-box');
+    if (button){
+        button.addEventListener('click', () => {
+            if (box.style.right === '-600px') {
+                box.style.right = '0';
+            } else {
+                box.style.right = '-600px';
+            }
+        });
+    }
+    if (close){
+        close.addEventListener('click', () => {
+            if (box.style.right === '-600px') {
+                box.style.right = '0';
+            } else {
+                box.style.right = '-600px';
+            }
+        });
+    }
+
 
     //estilos header. Funcionalidad de ocultar y mostrar
         const header = document.querySelector('.header');
@@ -72,14 +94,14 @@ window.onload = function (e){
                 if (ajax.status == 200) {
                     if (ajax.responseText ==1) {
                         console.log(ajax.responseText)
-                        let newPoint = document.createElement('span');
+                        let newPoint = document.createElement('button');
                         newPoint.setAttribute('class', 'point-span');
                         newPoint.setAttribute('value', parseInt(index) + 1);
                         newPoint.innerText = "P" + (parseInt(index) + 1);
 
                         // Insert the new span element before the "Add Point" button
                         pointsBox.insertBefore(newPoint, document.getElementById('addPoint'));
-
+                        addPointsClickEvent()
 
                     }
                 }
@@ -106,6 +128,7 @@ function addPointsClickEvent(){
     for (let i=0; i<points.length; i++){
         //al hacer click en un punto cambiar el foco a ese punto
         points[i].addEventListener('click',function (e){
+            e.preventDefault()
             changePointFocus(e)
         })
     }
@@ -210,6 +233,8 @@ function saveGincana(nombre,descripcion){
             var url = "./createGincana2/" + JSON.stringify(gincana);
             window.location.href = url;
 
+        }else{
+            showAlert(ajax.responseText)
         }
     }
     ajax.send(formada);
@@ -238,7 +263,11 @@ async function savePista(pistaId, pista){
         ajax.open('post', "./savePista");
         ajax.setRequestHeader('X-CSRF-TOKEN', csrfToken);
         ajax.onload = function () {
-            console.log(ajax.responseText)
+            if (ajax.responseText == "hola"){
+                showMessage('Punto guardado')
+            }else{
+                showAlert('Error al guardar punto')
+            }
         }
         ajax.send(formada);
     } else {
@@ -398,6 +427,21 @@ function showAlert(message) {
         alertDiv.classList.add("hide");
     }, 5000);
 }
+function showMessage(message) {
+    var alertDiv = document.getElementById("message");
+    alertDiv.innerHTML = message;
+    alertDiv.classList.remove("hide");
+    setTimeout(function() {
+        alertDiv.style.opacity = 1;
+    }, 100);
+    setTimeout(function() {
+        alertDiv.style.opacity = 0;
+    }, 4500);
+    setTimeout(function() {
+        alertDiv.classList.add("hide");
+    }, 5000);
+}
+
 
 
 

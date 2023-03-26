@@ -36,7 +36,7 @@
         {{-- Contenidos --}}
         <div id="menu-principal-contenidos">
             <div id="menu-principal-header"><a href="{{ route('home') }}"><i class="fa-solid fa-chevron-left"></i></a> GYMKHANA</div>
-            
+
             {{-- Crear sala --}}
             <div id="menu-principal-subheader">
                 <p id="menu-principal-subheader-titulo">{{ $gincana->nombre }}</p>
@@ -45,15 +45,15 @@
 
             @auth
                 <form action="{{ route('sala.store') }}" method="post" style="width: 100%;">
-                    @csrf 
+                    @csrf
                     <input type="hidden" name="gincana_id" value="{{ $gincana->id }}">
                     <button id="menu-sala-jugar" class="boton-verde">Crear sala</button>
                 </form>
             @endauth
-            
+
             <div id="menu-detalles-sala-wrapper">
                 @auth
-    
+
                     {{-- Si el usuario es el autor, podrá comenzar o terminar el juego --}}
                     @can('admin', $gincana)
                         <div class="menu-detalles-sala-item">
@@ -64,7 +64,7 @@
                             <div class="menu-detalles-sala-contenidos" data-menuID="acciones">
                                 <div class="boton-menu-principal localizacion-guardada">
                                     <i class="fa-solid fa-pen-to-square"></i>
-                                    <a href="{{ route('gincana.editar', $gincana->id) }}">
+                                    <a href="{{ route('gincana.editar', $gincana) }}">
                                         <div class="menu-info-sala-item-usuario-nombre">
                                             Editar
                                             <div class="loc-coordenadas">
@@ -138,7 +138,7 @@
                         </div>
                         <div class="boton-menu-principal localizacion-guardada" id="qr-compartir-wrapper">
                             <div class="menu-info-sala-item-usuario-nombre" id="qr-compartir">
-                                
+
                             </div>
                         </div>
                     </div>

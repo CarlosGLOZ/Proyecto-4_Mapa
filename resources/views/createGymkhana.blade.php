@@ -12,7 +12,6 @@
 @endsection
 
 @section('content')
-
     <div class="full-page">
 
             <div class="principal-title">
@@ -24,8 +23,10 @@
                 <i id="check1" name="check" class="fa-solid fa-circle-check check1"></i>
             </div>
         <div class="line-box"><hr><p>Or</p><hr></div>
-        <div class="tus-gincanas-box">Tus Gincanas</div>
+        <a href="{{route('gincana.lista')}}" class="tus-gincanas-box">Volver atras</a>
     </div>
+    <div id="alert" class="alert hide"></div>
+    <div id="message" class="message hide"></div>
 
 
 
