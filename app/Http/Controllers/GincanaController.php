@@ -8,6 +8,7 @@ use App\Models\Gincana;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use MongoDB\Driver\Session;
 use PHPUnit\Runner\Exception;
 use Psy\Util\Json;
@@ -44,9 +45,9 @@ class GincanaController extends Controller
        return view('createGymkhana', compact(['gincana']));
     }
 
-    public function index2($id){
-        $gin = Gincana::with('autor','puntos')->find($id);
-        return view('createGymkhana2',compact('gin'));
+    public function index2($gincana){
+        $gincana = Gincana::with('autor','puntos')->find(json_decode($gincana)->id);
+        return view('createGymkhana2',compact('gincana'));
     }
 
     public function crearView()
@@ -87,13 +88,17 @@ class GincanaController extends Controller
     {
        return Gincana::with('autor', 'puntos.localizacion', 'salas')->find($id);
     }
-    
-    public function saveGin(Request $request){
 
-        $request->validate([
-            'nombre' => 'required|unique:gincanas',
-            'descripcion' => 'required',
-        ]);
+    public function saveGin(Request $request){
+        $validator = Validator::make($request->all(), [
+                'nombre' => 'required|unique:gincanas',
+                'descripcion' => 'required',
+            ]);
+
+
+            if ($validator && $validator->fails()) {
+                return response($validator->errors()->first(), 422);
+            }
         $gincana= new Gincana;
         $gincana->nombre= $request->nombre;
         $gincana->descripcion= $request->descripcion;
@@ -103,7 +108,6 @@ class GincanaController extends Controller
     }
 
     public function savePista(Request $request){
-
         try {
             try {
                 $request->validate([
@@ -127,7 +131,7 @@ class GincanaController extends Controller
                 $loc->latitud=$request->latitud;
                 $loc->longitud=$request->longitud;
                 $loc->punto_gincana=1;
-                $loc->user_id=auth()->user()->id;
+                $loc->user_id=1;
                 $loc->save();
                 $id=$loc->id;
             }
@@ -189,9 +193,13 @@ class GincanaController extends Controller
         $finalPoint=PuntoGincana::where('gincana_id',$request->ginID)->where('posicion',$request->finalPoint)->first();
 
         if ($finalPoint){
-            return true;
+            return 1;
         }else{
-            return false;
+            return 0;
         }
+    }
+
+    public function deleteGin($gincana){
+        $gincana->delete();
     }
 }
