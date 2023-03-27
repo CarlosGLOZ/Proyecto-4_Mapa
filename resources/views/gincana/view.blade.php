@@ -62,9 +62,11 @@
                                 <p>Acciones</p>
                             </div>
                             <div class="menu-detalles-sala-contenidos" data-menuID="acciones">
-                                <div class="boton-menu-principal localizacion-guardada">
+                                <div class="boton-menu-principal localizacion-guardada" id="boton-editar-gincana">
                                     <i class="fa-solid fa-pen-to-square"></i>
-                                    <a href="{{ route('gincana.editar', $gincana) }}">
+                                    <form method="POST" action="{{ route('gincana.editar') }}" id="form-editar-gincana">
+                                        @csrf
+                                        <input type="hidden" name="id_gincana", value="{{ $gincana->id }}">
                                         <div class="menu-info-sala-item-usuario-nombre">
                                             Editar
                                             <div class="loc-coordenadas">
@@ -72,18 +74,29 @@
                                                 {{-- {{ $sala->gincana->autor->name }} --}}
                                             </div>
                                         </div>
-                                    </a>
+
+                                    </form>
+                                    <script>
+                                        document.getElementById('boton-editar-gincana').addEventListener('click', (e) => {document.getElementById('form-editar-gincana').submit()});
+                                    </script>
                                 </div>
-                                <div class="boton-menu-principal localizacion-guardada">
+                                <div class="boton-menu-principal localizacion-guardada" id="boton-eliminar-gincana">
                                     <i class="fa-solid fa-ban"></i>
-                                    <a href="{{ route('gincana.find', $gincana->id) }}">
+                                    <form method="POST" action="{{ route('gincana.delete', $gincana) }}" id="form-eliminar-gincana">
+                                        @csrf
+                                        @method('DELETE')
                                         <div class="menu-info-sala-item-usuario-nombre">
                                             Eliminar
                                             <div class="menu-info-sala-item-usuario-nombre loc-coordenadas">
                                                 {{ $gincana->nombre }}
                                             </div>
                                         </div>
-                                    </a>
+                                    </form>
+                                    <script>
+                                        document.getElementById('boton-eliminar-gincana').addEventListener('click', (e) => {
+                                            document.getElementById('form-eliminar-gincana').submit()
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
