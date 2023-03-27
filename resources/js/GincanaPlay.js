@@ -8,30 +8,13 @@ function ComprobaciónCheck(userPos, puntoPos) {
 
 
     //Latitud Puntos
-    let latSeparadaP = puntoPos.lat.toString().split(".", puntoPos.lat);
-    let latUnidadesP = latSeparadaP[0];
-    let latDecimalesP = latSeparadaP[1].substring(0, 4);
-    let latJuntaP = [latUnidadesP, latDecimalesP].join('.')
+    let LatResta = Math.abs(puntoPos.lat - userPos.lat);
 
-    //Longitud Puntos
-    let lngSeparadaP = puntoPos.lon.toString().split(".", puntoPos.lon);
-    let lngUnidadesP = lngSeparadaP[0];
-    let lngDecimalesP = lngSeparadaP[1].substring(0, 4);
-    let lngJuntaP = [lngUnidadesP, lngDecimalesP].join('.')
 
-    //Latitud Usuario
-    let latSeparada = userPos.lat.toString().split(".", userPos.lat);
-    let latUnidades = latSeparada[0];
-    let latDecimales = latSeparada[1].substring(0, 4);
-    let latJunta = [latUnidades, latDecimales].join('.')
+    let LonResta = Math.abs(puntoPos.lon - userPos.lng);
 
-    //Longitud Usuario
-    let lngSeparada = userPos.lng.toString().split(".", userPos.lng);
-    let lngUnidades = lngSeparada[0];
-    let lngDecimales = lngSeparada[1].substring(0, 4);
-    let lngJunta = [lngUnidades, lngDecimales].join('.')
 
-    if (latJuntaP == latJunta && lngJuntaP == lngJunta) {
+    if (LatResta <= 0.001 && LonResta <= 0.0005) {
         Swal.fire({
             icon: 'success',
             title: 'Correcto',

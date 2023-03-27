@@ -41,10 +41,12 @@ Route::get('/gincana/{id}', [GincanaController::class, 'view'])->name('gincana.v
 Route::get('/gincana/find/{id}', [GincanaController::class, 'find'])->name('gincana.find');
 
 Route::get('/createGincana', [GincanaController::class, 'index'])->name('gincana.crear');;
-Route::get('/createGincana2/{gincana}', [GincanaController::class, 'index2'])->name('gincana.editar');
+Route::post('/createGincana2', [GincanaController::class, 'saveGin2'])->name('gincana.store');
+Route::post('/editarGincana', [GincanaController::class, 'index2'])->name('gincana.editar');
+Route::delete('/gincana/borrar/{gincana}', [GincanaController::class, 'deleteGin'])->name('gincana.delete');
 Route::post('listar', [GincanaController::class, 'listar']);
 Route::post('/createGincana2/savePista', [GincanaController::class, 'savePista'])->name('gincana.savepista');
-Route::post('/saveGin', [GincanaController::class, 'saveGin'])->name('gincana.saveGin');
+// Route::post('/saveGin', [GincanaController::class, 'saveGin'])->name('gincana.saveGin');
 Route::post('/createGincana2/getLocaFromPoint', [GincanaController::class, 'getLocaFromPoint'])->name('gincana.getLocaFromPoint');
 Route::post('/createGincana2/PointComplete', [GincanaController::class, 'pointComplete'])->name('gincana.pointComplete');
 Route::post('/createGincana2/deletePista', [GincanaController::class, 'deletePista'])->name('gincana.deletePista');

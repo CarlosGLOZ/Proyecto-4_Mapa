@@ -1,9 +1,9 @@
-window.onload = function (e){
+window.onload = function(e) {
 
     const button = document.getElementById('toggle-button');
     const close = document.getElementById('close')
     const box = document.getElementById('point-box');
-    if (button){
+    if (button) {
         button.addEventListener('click', () => {
             if (box.style.right === '-600px') {
                 box.style.right = '0';
@@ -12,7 +12,7 @@ window.onload = function (e){
             }
         });
     }
-    if (close){
+    if (close) {
         close.addEventListener('click', () => {
             if (box.style.right === '-600px') {
                 box.style.right = '0';
@@ -24,52 +24,53 @@ window.onload = function (e){
 
 
     //estilos header. Funcionalidad de ocultar y mostrar
-        const header = document.querySelector('.header');
-        const mapaMain = document.getElementById('mapa-main');
-        const headerToggle = document.querySelector('.header-toggle');
-        if (headerToggle){
-            headerToggle.addEventListener('click', (event) => {
-                event.stopPropagation();
-                if (parseInt(getComputedStyle(header).height)>=200 || header.style.height==='25vh') {
-                    mapaMain.style.height='95vh'
-                    mapaMain.style.top='5.5vh'
-                    header.style.height ='5vh'; // Altura de header visible en centímetros (ej: 5cm => -20vh)
-                    headerToggle.innerHTML = '<i class="fa-solid fa-chevron-down"></i>';
-                }else if (header.style.height=='5vh'){
-                    mapaMain.style.height='75vh';
-                    mapaMain.style.top='25vh';
-                    header.style.height = '25vh';
-                    headerToggle.innerHTML = '<i class="fa-solid fa-chevron-up"></i>';
-                }
-            });
-        }
+    const header = document.querySelector('.header');
+    const mapaMain = document.getElementById('mapa-main');
+    const headerToggle = document.querySelector('.header-toggle');
+    if (headerToggle) {
+        headerToggle.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (parseInt(getComputedStyle(header).height) >= 200 || header.style.height === '25vh') {
+                mapaMain.style.height = '95vh'
+                mapaMain.style.top = '5.5vh'
+                header.style.height = '5vh'; // Altura de header visible en centímetros (ej: 5cm => -20vh)
+                headerToggle.innerHTML = '<i class="fa-solid fa-chevron-down"></i>';
+            } else if (header.style.height == '5vh') {
+                mapaMain.style.height = '75vh';
+                mapaMain.style.top = '25vh';
+                header.style.height = '25vh';
+                headerToggle.innerHTML = '<i class="fa-solid fa-chevron-up"></i>';
+            }
+        });
+    }
 
-        if (document.getElementById('check1')){
-            document.getElementById('check1').addEventListener('click',function (e){
-                saveGincana(document.getElementById('ginNombre').value,document.getElementById('descripcion').value)
-            })
-        }
-       if (document.getElementById('check2')){
-           document.getElementById('check2').addEventListener('click', function (e){
-               savePista(document.getElementById('active-point').getAttribute('value'), document.getElementById('pista').value)
+    if (document.getElementById('check1')) {
+        document.getElementById('check1').addEventListener('click', function(e) {
+            // saveGincana(document.getElementById('ginNombre').value,document.getElementById('descripcion').value)
+            document.getElementById('form-crear-gincana').submit();
+        })
+    }
+    if (document.getElementById('check2')) {
+        document.getElementById('check2').addEventListener('click', function(e) {
+            savePista(document.getElementById('active-point').getAttribute('value'), document.getElementById('pista').value)
 
-           })
-       }
-    if (document.getElementById('check3')){
-        document.getElementById('check3').addEventListener('click', function (e){
+        })
+    }
+    if (document.getElementById('check3')) {
+        document.getElementById('check3').addEventListener('click', function(e) {
             deletePista(document.getElementById('active-point').getAttribute('value'), document.getElementById('pista').value)
 
         })
     }
 
 
-   //Funcionalidad puntos
+    //Funcionalidad puntos
 
 
     var activePoint //variable que contiene el html del punto con el foco (es decir el punto editable en el formulario)
-    if (  document.getElementById('addPoint')){
+    if (document.getElementById('addPoint')) {
         //añadir puntos a la lista
-        document.getElementById('addPoint').addEventListener('click', function (e) {
+        document.getElementById('addPoint').addEventListener('click', function(e) {
 
             let pointsBox = document.getElementById('points-box');
             let points = document.getElementsByClassName('point-span');
@@ -87,12 +88,12 @@ window.onload = function (e){
             var formada = new FormData();
             formada.append('PointId', e.target.getAttribute('value'))
             formada.append('ginID', ginID)
-            formada.append('finalPoint',finalPoint)
-            ajax.open('post', "./PointComplete");
+            formada.append('finalPoint', finalPoint)
+            ajax.open('post', "createGincana2/PointComplete");
             ajax.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-            ajax.onload = function () {
+            ajax.onload = function() {
                 if (ajax.status == 200) {
-                    if (ajax.responseText ==1) {
+                    if (ajax.responseText == 1) {
                         console.log(ajax.responseText)
                         let newPoint = document.createElement('button');
                         newPoint.setAttribute('class', 'point-span');
@@ -117,17 +118,17 @@ window.onload = function (e){
 
 
     }
-    }
+}
 
 const mapaMain = document.getElementById('mapa-main');
-var activemark=[]
-var place=false
+var activemark = []
+var place = false
 
-function addPointsClickEvent(){
-    let points= document.getElementsByClassName('point-span') //recoger todos los puntos
-    for (let i=0; i<points.length; i++){
+function addPointsClickEvent() {
+    let points = document.getElementsByClassName('point-span') //recoger todos los puntos
+    for (let i = 0; i < points.length; i++) {
         //al hacer click en un punto cambiar el foco a ese punto
-        points[i].addEventListener('click',function (e){
+        points[i].addEventListener('click', function(e) {
             e.preventDefault()
             changePointFocus(e)
         })
@@ -135,23 +136,23 @@ function addPointsClickEvent(){
 
 }
 
-function changePointFocus(e){
+function changePointFocus(e) {
 
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const ginID= document.getElementById('ginID').value
+    const ginID = document.getElementById('ginID').value
     var ajax = new XMLHttpRequest();
     var formada = new FormData();
     formada.append('PointId', e.target.getAttribute('value'))
     formada.append('ginID', ginID)
-    ajax.open('post', "./getLocaFromPoint");
+    ajax.open('post', "createGincana2/getLocaFromPoint");
     ajax.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-    ajax.onload = function () {
-        if (ajax.status==200){
-            if (ajax.responseText !=="false"){
-                data=JSON.parse(ajax.responseText)
+    ajax.onload = function() {
+        if (ajax.status == 200) {
+            if (ajax.responseText !== "false") {
+                data = JSON.parse(ajax.responseText)
 
-                document.getElementById('pista').value=data.pista
+                document.getElementById('pista').value = data.pista
                 const ubicacionMarcador = new google.maps.LatLng(data.localizacion.latitud, data.localizacion.longitud);
                 const map = new google.maps.Map(document.getElementById("mapa-main"), {
                     zoom: 15,
@@ -165,53 +166,53 @@ function changePointFocus(e){
 
                 placeMarker(ubicacionMarcador, map)
 
-                map.addListener('click', function (event) {
+                map.addListener('click', function(event) {
                     // If the event is a POI
                     if (event.placeId) {
                         // Call event.stop() on the event to prevent the default info window from showing.
                         event.stop();
                         // do any other stuff you want to do
                         console.log('You clicked on place:' + event.placeId + ', location: ' + event.latLng);
-                        place=true;
-                    }else{
+                        place = true;
+                    } else {
                         console.log('You clicked on location: ' + event.latLng);
-                        place=false;
+                        place = false;
                     }
-                    if(place==false){
+                    if (place == false) {
                         placeMarker(event.latLng, map);
-                    }else{
-                        placeIPMarker(event.latLng,map)
+                    } else {
+                        placeIPMarker(event.latLng, map)
                     }
 
                 })
-            }else{
+            } else {
                 setMapOnAll(null);
                 activemark = [];
-                document.getElementById('pista').value=null
+                document.getElementById('pista').value = null
             }
         }
     }
     ajax.send(formada);
 
 
-    const activePointSpan=document.getElementById('active-point')
-    if (typeof activePoint !== 'undefined'){
-        activePoint.style.backgroundColor='gray'
-        activePoint.style.color='white'
-        activePoint=e.target
-        activePointSpan.innerHTML="Point "+e.target.getAttribute('value')
+    const activePointSpan = document.getElementById('active-point')
+    if (typeof activePoint !== 'undefined') {
+        activePoint.style.backgroundColor = 'gray'
+        activePoint.style.color = 'white'
+        activePoint = e.target
+        activePointSpan.innerHTML = "Point " + e.target.getAttribute('value')
         console.log(e.target)
-        activePointSpan.setAttribute('value',e.target.getAttribute('value'))
-        activePoint.style.backgroundColor='black'
-        activePoint.style.color='white'
+        activePointSpan.setAttribute('value', e.target.getAttribute('value'))
+        activePoint.style.backgroundColor = 'black'
+        activePoint.style.color = 'white'
 
-    }else{
-        activePoint=e.target
-        activePointSpan.innerHTML="Point "+e.target.getAttribute('value')
+    } else {
+        activePoint = e.target
+        activePointSpan.innerHTML = "Point " + e.target.getAttribute('value')
         console.log(e.target)
-        activePointSpan.setAttribute('value',e.target.getAttribute('value'))
-        activePoint.style.backgroundColor='black'
-        activePoint.style.color='white'
+        activePointSpan.setAttribute('value', e.target.getAttribute('value'))
+        activePoint.style.backgroundColor = 'black'
+        activePoint.style.color = 'white'
     }
 
 
@@ -219,53 +220,53 @@ function changePointFocus(e){
 
 
 
-function saveGincana(nombre,descripcion){
+function saveGincana(nombre, descripcion) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     var ajax = new XMLHttpRequest();
     var formada = new FormData();
     formada.append('nombre', nombre)
     formada.append('descripcion', descripcion)
-    ajax.open('post', "./saveGin");
+    ajax.open('post', "createGincana2/saveGin");
     ajax.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-    ajax.onload = function () {
-        if (ajax.status == 201 || ajax.status==200) {
+    ajax.onload = function() {
+        if (ajax.status == 201 || ajax.status == 200) {
             var gincana = JSON.parse(ajax.responseText); // Parse the response as JSON
-            var url = "./createGincana2/" + JSON.stringify(gincana);
+            var url = "createGincana2/createGincana2/" + JSON.stringify(gincana);
             window.location.href = url;
 
-        }else{
+        } else {
             showAlert(ajax.responseText)
         }
     }
     ajax.send(formada);
 }
 
-async function savePista(pistaId, pista){
+async function savePista(pistaId, pista) {
 
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const ginID= document.getElementById('ginID').value
+    const ginID = document.getElementById('ginID').value
     var ajax = new XMLHttpRequest();
     var formada = new FormData();
     formada.append('id', pistaId)
     formada.append('pista', pista)
     formada.append('ginID', ginID)
-    if (pistaId=="undefined"){
+    if (pistaId == "undefined") {
         showAlert('Selecciona un Punto')
         return false
 
-    }else if (pista=="" || pista==null || typeof pista=="undefined"){
+    } else if (pista == "" || pista == null || typeof pista == "undefined") {
         showAlert('Introduce una pista para continuar')
         return false
-    }else if (activemark && activemark.length > 0) {
-        await formada.append('latitud',activemark[0].getPosition().lat());
-        await formada.append('longitud',activemark[0].getPosition().lng());
-        ajax.open('post', "./savePista");
+    } else if (activemark && activemark.length > 0) {
+        await formada.append('latitud', activemark[0].getPosition().lat());
+        await formada.append('longitud', activemark[0].getPosition().lng());
+        ajax.open('post', "createGincana2/savePista");
         ajax.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-        ajax.onload = function () {
-            if (ajax.responseText == "hola"){
+        ajax.onload = function() {
+            if (ajax.responseText == "hola") {
                 showMessage('Punto guardado')
-            }else{
+            } else {
                 showAlert('Error al guardar punto')
             }
         }
@@ -282,28 +283,33 @@ async function savePista(pistaId, pista){
 
 
 
-async function deletePista(pistaId, pista){
+async function deletePista(pistaId, pista) {
 
-    const allPoints=document.getElementsByClassName('point-span')
-    let points=[]
-    for (let i=0; i<allPoints.length;i++){
+    const allPoints = document.getElementsByClassName('point-span')
+    let points = []
+    for (let i = 0; i < allPoints.length; i++) {
         points.push(allPoints[i].getAttribute('value'))
     }
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const ginID= document.getElementById('ginID').value
+    const ginID = document.getElementById('ginID').value
     var ajax = new XMLHttpRequest();
     var formada = new FormData();
     formada.append('id', pistaId)
     formada.append('pista', pista)
     formada.append('ginID', ginID)
     formada.append('points', points)
-    await formada.append('latitud',activemark[0].getPosition().lat())
-    await formada.append('longitud',activemark[0].getPosition().lng())
-    await formada.append('longitud',activemark[0].getPosition().lng())
-    ajax.open('post', "./deletePista");
+    await formada.append('latitud', activemark[0].getPosition().lat())
+    await formada.append('longitud', activemark[0].getPosition().lng())
+    await formada.append('longitud', activemark[0].getPosition().lng())
+    ajax.open('post', "createGincana2/deletePista");
     ajax.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-    ajax.onload = function () {
-        console.log(ajax.responseText)
+    ajax.onload = function() {
+        if (ajax.responseText == "borrado") {
+            showMessage('Punto Borrado')
+            setTimeout((e) => {
+                location.reload()
+            }, 2000);
+        }
     }
     ajax.send(formada);
 }
@@ -331,7 +337,7 @@ function initMap() {
 
 
     //creamos el mapa
-    const centerPoint = {lat: 41.374961, lng: 2.149080};
+    const centerPoint = { lat: 41.374961, lng: 2.149080 };
 
     const map = new google.maps.Map(document.getElementById("mapa-main"), {
         zoom: 15,
@@ -343,74 +349,74 @@ function initMap() {
     });
 
 
-    map.addListener('click', function (event) {
+    map.addListener('click', function(event) {
         // If the event is a POI
         if (event.placeId) {
             // Call event.stop() on the event to prevent the default info window from showing.
             event.stop();
             // do any other stuff you want to do
             console.log('You clicked on place:' + event.placeId + ', location: ' + event.latLng);
-             place=true;
-        }else{
+            place = true;
+        } else {
             console.log('You clicked on location: ' + event.latLng);
-             place=false;
+            place = false;
         }
-        if(place==false){
+        if (place == false) {
             placeMarker(event.latLng, map);
-        }else{
-            placeIPMarker(event.latLng,map)
+        } else {
+            placeIPMarker(event.latLng, map)
         }
 
     })
 }
 
 
-     function placeMarker(position, map, ) {
+function placeMarker(position, map, ) {
 
-         var marcador = new google.maps.Marker({
-             position: position,
-             map: map,
+    var marcador = new google.maps.Marker({
+        position: position,
+        map: map,
 
 
 
-         });
-         if (activemark.length >=1){
-             setMapOnAll(null);
-             activemark = [];
-             marcador.setIcon(null);
-             console.log("Vacia2: "+activemark.length)
-         }
-         activemark.push(marcador)
-         map.panTo(position);
+    });
+    if (activemark.length >= 1) {
+        setMapOnAll(null);
+        activemark = [];
+        marcador.setIcon(null);
+        console.log("Vacia2: " + activemark.length)
+    }
+    activemark.push(marcador)
+    map.panTo(position);
+}
+
+function placeIPMarker(position, map) {
+
+    var marcador = new google.maps.Marker({
+        position: position,
+        map: map,
+
+
+
+    });
+    if (activemark.length >= 1) {
+        setMapOnAll(null);
+        activemark = [];
+        marcador.setIcon(null);
+        console.log("Vacia2: " + activemark.length)
+    }
+    activemark.push(marcador)
+    map.panTo(position);
+}
+
+
+function setMapOnAll() {
+    console.log(activemark.length)
+    for (var i = 0; i < activemark.length; i++) {
+        activemark[i].setMap(null);
     }
 
-         function placeIPMarker(position,map){
-
-            var marcador = new google.maps.Marker({
-                position: position,
-                map: map,
-
-
-
-            });
-            if (activemark.length >=1){
-                setMapOnAll(null);
-                activemark = [];
-                marcador.setIcon(null);
-                console.log("Vacia2: "+activemark.length)
-            }
-            activemark.push(marcador)
-            map.panTo(position);
-        }
-
-
-    function setMapOnAll() {
-       console.log( activemark.length)
-        for (var i = 0; i < activemark.length; i++) {
-            activemark[i].setMap(null);
-        }
-
-    }
+}
 
 
 function showAlert(message) {
@@ -427,6 +433,7 @@ function showAlert(message) {
         alertDiv.classList.add("hide");
     }, 5000);
 }
+
 function showMessage(message) {
     var alertDiv = document.getElementById("message");
     alertDiv.innerHTML = message;
@@ -446,6 +453,3 @@ function showMessage(message) {
 
 
 window.initMap = initMap;
-
-
-

@@ -45,9 +45,25 @@ class GincanaController extends Controller
        return view('createGymkhana', compact(['gincana']));
     }
 
-    public function index2($gincana){
-        $gincana = Gincana::with('autor','puntos')->find(json_decode($gincana)->id);
-        return view('createGymkhana2',compact('gincana'));
+    public function index2(Request $request){
+        $gincana = Gincana::with('autor','puntos')->find($request->input('id_gincana'));
+        return view('createGymkhana2', compact('gincana'));
+    }
+
+    public function saveGin2(Request $request){
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+        ]);
+        
+        $id = Gincana::insertGetId([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        $gincana = Gincana::with('autor','puntos')->find($id);
+        return view('createGymkhana2', compact('gincana'));
     }
 
     public function crearView()
@@ -176,7 +192,7 @@ class GincanaController extends Controller
 
             }
         }
-
+        return "borrado";
     }
 
     public function getLocaFromPoint(Request $request){
@@ -199,7 +215,8 @@ class GincanaController extends Controller
         }
     }
 
-    public function deleteGin($gincana){
+    public function deleteGin(Gincana $gincana){
         $gincana->delete();
+        return redirect()->route('home');
     }
 }
