@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Gincana;
+use App\Models\SalaGincana;
+use App\Policies\GincanaPolicy;
+use App\Policies\SalaPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -14,6 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        SalaGincana::class => SalaPolicy::class,
+        Gincana::class => GincanaPolicy::class,
     ];
 
     /**

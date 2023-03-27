@@ -1,0 +1,268 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap');
+
+.full-page{
+    margin: 2%;
+    width:97%;
+    height: 97vh;
+    background-color: #ffffff;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.principal-title{
+    margin-top: 29%;
+    margin-bottom: 3%;
+}
+.full-page div input{
+    margin-top: 15%;
+    margin-bottom: 10%;
+    width: 70%;
+    padding: 3%;
+
+}
+.full-page div textarea{
+    width: 70%;
+    height: 15vh;
+    padding: 3%;
+}
+.full-page  div i{
+    margin-top: 5%;
+}
+
+.line-box{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.fa-solid{
+    font-size: 2rem !important;
+}
+
+.line-box p{
+    padding: 2%;
+    color: rgb(90, 96, 108);
+    text-align: center;
+}
+.tus-gincanas-box{
+    margin-top: 10%;
+    background-color: #1a202c;
+    padding: 5%;
+    color: white;
+    border-radius: 5%;
+}
+.line-box hr{
+    height: 0.5px;
+    border: none;
+    background-color: black;
+    width: 50%;
+    margin: 0 10px;
+}
+
+.full-page div[class="inputs"]{
+    display: flex;
+    align-items: center;
+    height: 45%;
+    margin-top: 7%;
+    width: 100%;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100vh;
+    align-items: center;
+}
+.content .header .tittle{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 2%;
+    font-family: 'Abhaya Libre', serif;
+
+}
+.point-info{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+
+}
+#container {
+    position: fixed;
+    top: 25%;
+    width: 100%;
+    right: 0;
+}
+
+#toggle-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background-color: #343434b8;
+    color: yellow;
+
+}
+
+.point-info {
+    position: absolute;
+    top: 0;
+    right: -600px;
+    width: 100%;
+    height: 10vh;
+    background-color: lightgray;
+    transition: right 0.5s ease-in-out;
+    overflow: hidden;
+    z-index: 5;
+    right: 0px;
+    color: white;
+    background-color: #343434;
+    height: 19vh;
+    display: flex;
+    align-items: center;
+}
+.points{
+    display: flex;
+    margin: -10px 0px 0px 0px;
+    max-width: 90%;
+    overflow-x: scroll;
+}
+.buttons-confPoint{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+    z-index: 3;
+
+
+}
+.buttons-confPoint i {
+    font-size: 2.5rem;
+    padding: 2%;
+    z-index: 3;
+
+}
+.pista-textArea{
+    width: 62%;
+    height: 14vh;
+    background-color: #707070;
+    color: white;
+}
+#close{
+    font-size: 1.5rem;
+    position: relative;
+    height: 100%;
+    top: 6%;
+    left: -2%;
+}
+.pista-textArea::placeholder {
+    color: white;
+}
+#check2{
+    color: green;
+    background-color: #ffffff;
+}
+#check3{
+    color: darkred;
+    background-color: #ffffff;
+}
+.inputs{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5% ;
+}
+
+.point-span{
+    border-radius: 5px;
+    border: 1px solid gray;
+    font-size: 1.5rem;
+    background-color: white;
+    padding: 2%;
+    margin: 2%;
+}
+.add-point-span{
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 3%;
+    background-color: green;
+    position: absolute;
+    right: 2%;
+    top: 50%;
+}
+.header {
+    height: 16vh;
+    background-color: #000000b3;
+    width: 101%;
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: top 0.3s ease-in-out;
+}
+
+.header h3{
+    padding: 3% 5% ;
+    color: white;
+}
+
+.header-toggle {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#mapa-main {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}
+
+.alert {
+    position: fixed;
+    bottom: 15%;
+    left: 50%;
+    z-index: 10;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 50px;
+    border-radius: 25px;
+    background-color: red;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.message {
+    position: fixed;
+    bottom: 15%;
+    left: 50%;
+    z-index: 10;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #105f0a;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+.hide {
+    visibility: hidden;
+}
